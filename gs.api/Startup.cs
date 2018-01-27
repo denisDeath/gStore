@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace gs.api
 {
@@ -24,6 +26,25 @@ namespace gs.api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Evotor API", Version = "v1" });
+                
+                // list of tuples fileName - file extension.
+                var files = new List<Tuple<string, string>>();
+
+                files.AddRange(Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll")
+                    .Select(f => new Tuple<string, string>(f, "dll")));
+
+                foreach (Tuple<string, string> file in files)
+                {
+                    string commentFileName = file.Item1.Replace("." + file.Item2, ".xml");
+                    if (!File.Exists(commentFileName))
+                        continue;
+
+                    c.IncludeXmlComments(commentFileName);
+                }
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +56,12 @@ namespace gs.api
             }
 
             app.UseMvc();
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Evotor API V1");
+            });
         }
     }
 }
