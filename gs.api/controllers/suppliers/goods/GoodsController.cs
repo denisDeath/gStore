@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using gs.api.contracts.suppliers.goods;
+using gs.api.services.suppliers.interfaces;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace gs.api.controllers.suppliers.goods
@@ -7,14 +10,17 @@ namespace gs.api.controllers.suppliers.goods
     [Route("api/suppliers/goods/list/[action]")]
     public class GoodsController : Controller
     {
+        private readonly IGoodsService GoodsService;
+
+        public GoodsController([NotNull] IGoodsService goodsService)
+        {
+            GoodsService = goodsService ?? throw new ArgumentNullException(nameof(goodsService));
+        }
+
         [HttpGet]
         public GetGoodsResponse GetGoods()
         {
-            return new GetGoodsResponse(new List<Good>
-            {
-                new Good(1, "iphone", string.Empty),
-                new Good(1, "xiaomi redmi 4x", string.Empty)
-            });
+            return GoodsService.GetGoods();
         }
 
         [HttpPut]
