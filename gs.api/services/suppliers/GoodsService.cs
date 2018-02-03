@@ -18,7 +18,7 @@ namespace gs.api.services.suppliers
 
         public GetGoodsResponse GetGoods()
         {
-            throw new NotImplementedException();
+            return new GetGoodsResponse(new[] {new Good(666, "test good", "test description")});
         }
     }
 }
