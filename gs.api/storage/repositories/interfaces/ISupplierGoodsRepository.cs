@@ -1,6 +1,6 @@
 ﻿namespace gs.api.storage.repositories.interfaces
 {
-    public class ISupplierGoodsRepository
+    public interface ISupplierGoodsRepository
     {
         
     }
