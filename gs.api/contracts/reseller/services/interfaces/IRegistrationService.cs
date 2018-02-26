@@ -1,4 +1,5 @@
 ﻿using gs.api.contracts.reseller.dto.exceptions;
+using gs.api.contracts.reseller.dto.registration;
 
 namespace gs.api.contracts.reseller.services.interfaces
 {
