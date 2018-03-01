@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace gs.api.contracts.reseller
+namespace gs.api.contracts.reseller.dto.registration
 {
     /// <summary>
     /// Пользователь-реселлер.

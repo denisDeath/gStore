@@ -47,6 +47,8 @@ namespace gs.api.infrastructure
                 AddEntityFrameworkNpgsql()
                 .AddDbContext<Context>(options => options.UseNpgsql(dbSettings.ConnectionString));
 
+//            services.AddScoped<Context>();
+            
             services.AddTransient<IOrganizationsRepository, OrganizationsRepository>();
         }
         

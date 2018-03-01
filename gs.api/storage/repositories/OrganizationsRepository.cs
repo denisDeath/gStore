@@ -24,7 +24,9 @@ namespace gs.api.storage.repositories
 
         public IEnumerable<Organization> GetAll()
         {
-            return Context.Organizations.ToList();
+            return Context.IeOrganizations.Cast<Organization>()
+                .Union(Context.LtdOrganizations).Cast<Organization>()
+                .ToList();
         }
     }
 }

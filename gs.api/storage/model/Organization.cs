@@ -1,24 +1,32 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.Serialization;
 
 namespace gs.api.storage.model
 {
-    [DataContract]
-    public class Organization
+    public abstract class Organization
     {
-        public Organization(long id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
-
         [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
-        [DataMember(IsRequired = true)]
-        public long Id { get; set; }
-
-        [DataMember(IsRequired = true)]
+        public long OrganizationId { get; set; }
+        
+        [Required, ForeignKey(nameof(User.UserId))]
+        public User Owner { get; set; }
+        
         [Required, MinLength(3), MaxLength(50)]
-        public string Name { get; set; }
+        public string TradeMark { get; set; }
+        
+        [MaxLength(50)]
+        public string FullName { get; set; }
+
+        [MaxLength(500)]
+        public string Address { get; set; }
+        
+        [MaxLength(50)]
+        public string Phone { get; set; }
+        
+        /// <summary>
+        /// инн
+        /// </summary>
+        [MaxLength(50)]
+        public string Inn { get; set; }
     }
 }

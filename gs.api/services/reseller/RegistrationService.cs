@@ -1,34 +1,79 @@
-﻿using gs.api.contracts.reseller;
+﻿using System;
+using System.Linq;
+using System.Text;
+using gs.api.contracts.reseller;
+using gs.api.contracts.reseller.dto.exceptions;
 using gs.api.contracts.reseller.dto.registration;
 using gs.api.contracts.reseller.services.interfaces;
 using gs.api.converters.reseller;
-using gs.api.storage.repositories.interfaces;
+using gs.api.storage;
+using JetBrains.Annotations;
+
+using OrganizationDb = gs.api.storage.model.Organization;
+using IeUserDb = gs.api.storage.model.User;
 
 namespace gs.api.services.reseller
 {
     public class RegistrationService : IRegistrationService
     {
-        private readonly IOrganizationsRepository OrganizationsRepository;
+        private readonly Context Context;
+        private const uint TokenExpirationInMinutes = 10;
 
-        public RegistrationService(IOrganizationsRepository organizationsRepository)
+        public RegistrationService(Context context)
         {
-            OrganizationsRepository = organizationsRepository;
+            Context = context;
         }
 
-        public RegisterOrganizationResponse RegisterOrganization(RegisterOrganizationRequest request)
+        public RegisterOrganizationResponse RegisterOrganization([NotNull] RegisterOrganizationRequest request)
         {
-            OrganizationsRepository.AddOrganization(request.Organization.Convert());
-            return new RegisterOrganizationResponse("666");
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            
+            var user = request.Owner.Convert();
+            var existingUser = Context.Users.FirstOrDefault(u => u.Email == user.Email);
+            if (existingUser != null)
+                throw new UserAlreadyExistsException();
+            Context.Add(user);
+            
+            var org = request.Organization.Convert();
+            if (IsOrgExistsByByTrademark(org.TradeMark) || IsOrganizationExistsByInn(org.Inn))
+                throw new OrganizationAlreadyExistsException();
+            org.Owner = user;
+            Context.Add(org);
+            Context.SaveChanges();
+            
+            byte[] bytes = Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
+            user.Token = Convert.ToBase64String(bytes);
+            user.TokenExpireDate = DateTime.UtcNow.AddMinutes(TokenExpirationInMinutes);
+            Context.SaveChanges();
+            return new RegisterOrganizationResponse(user.Token);
         }
 
-        public bool IsOrganizationNameExists(IsOrganizationNameExistsRequest request)
+        public IsOrganizationExistsResponse IsOrganizationExists([NotNull] IsOrganizationExistsRequest request)
         {
-            throw new System.NotImplementedException();
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            bool byTrademark = IsOrgExistsByByTrademark(request.Trademark);
+            bool byInn = IsOrganizationExistsByInn(request.Inn);
+            return new IsOrganizationExistsResponse(byTrademark, byInn);
         }
 
-        public bool IsUserEmailExists(IsUserEmailExistsRequest request)
+        public bool IsUserEmailExists([NotNull] IsUserEmailExistsRequest request)
         {
-            throw new System.NotImplementedException();
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            return Context.Users.Any(u => u.Email == request.Email);
+        }
+        
+        private bool IsOrgExistsByByTrademark(string tradeMark)
+        {
+            bool byTrademarkIe = Context.IeOrganizations.Any(o => o.TradeMark == tradeMark);
+            bool byTrademarkLtd = Context.LtdOrganizations.Any(o => o.TradeMark == tradeMark);
+            return byTrademarkIe || byTrademarkLtd;
+        }
+        
+        private bool IsOrganizationExistsByInn(string inn)
+        {
+            bool byInnIe = Context.IeOrganizations.Any(o => o.Inn == inn);
+            bool byInn = Context.LtdOrganizations.Any(o => o.Inn == inn);
+            return byInnIe || byInn;
         }
     }
 }

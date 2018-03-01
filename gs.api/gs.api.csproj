@@ -17,7 +17,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers" />
+    <Folder Include="controllers\resellers\users" />
     <Folder Include="controllers\suppliers" />
+    <Folder Include="Migrations" />
     <Folder Include="storage\repositories\postgres\scripts" />
   </ItemGroup>
   <PropertyGroup>

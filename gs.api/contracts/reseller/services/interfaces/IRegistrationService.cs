@@ -18,7 +18,7 @@ namespace gs.api.contracts.reseller.services.interfaces
         /// <summary>
         /// Проверка, есть ли уже организация с указанным именем.
         /// </summary>
-        bool IsOrganizationNameExists(IsOrganizationNameExistsRequest request);
+        IsOrganizationExistsResponse IsOrganizationExists(IsOrganizationExistsRequest request);
 
         /// <summary>
         /// Проверка, есть ли уже пользователь с указанным email.

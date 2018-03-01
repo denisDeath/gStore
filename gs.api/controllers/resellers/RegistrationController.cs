@@ -5,9 +5,9 @@ using gs.api.contracts.reseller.services.interfaces;
 using gs.api.contracts.suppliers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace gs.api.controllers.suppliers.users
+namespace gs.api.controllers.resellers
 {
-    [Route("api/suppliers/users/registration/[action]")]
+    [Route("api/resellers/registration/[action]")]
     public class RegistrationController : Controller
     {
         private readonly IRegistrationService RegistrationService;
@@ -17,19 +17,25 @@ namespace gs.api.controllers.suppliers.users
             RegistrationService = registrationService;
         }
 
-        [HttpPut]
+        [HttpPost]
         public RegisterOrganizationResponse RegisterOrganization([FromBody] RegisterOrganizationRequest request)
         {
             return RegistrationService.RegisterOrganization(request);
         }
 
-        [HttpDelete]
-        public void Delete()
+        [HttpPost]
+        public IsOrganizationExistsResponse IsOrganizationExists([FromBody] IsOrganizationExistsRequest request)
         {
-            throw new NotImplementedException();
+            return RegistrationService.IsOrganizationExists(request);
         }
 
-        [HttpGet]
+        [HttpPost]
+        public bool IsUserEmailExists([FromBody] IsUserEmailExistsRequest request)
+        {
+            return RegistrationService.IsUserEmailExists(request);
+        }
+        
+        [HttpPost]
         public AuthResponse Auth([FromBody] AuthRequest request)
         {
             throw new NotImplementedException();
