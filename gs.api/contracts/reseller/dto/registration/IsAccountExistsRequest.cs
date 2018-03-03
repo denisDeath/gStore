@@ -3,18 +3,18 @@
 namespace gs.api.contracts.reseller.dto.registration
 {
     [DataContract]
-    public class IsOrganizationExistsRequest
+    public class IsAccountExistsRequest
     {
-        public IsOrganizationExistsRequest(string trademark, string inn)
+        public IsAccountExistsRequest(string trademark, string userPhoneNumber)
         {
             Trademark = trademark;
-            Inn = inn;
+            UserPhoneNumber = userPhoneNumber;
         }
 
         [DataMember(IsRequired = true)]
         public string Trademark { get; }
         
         [DataMember(IsRequired = true)]
-        public string Inn { get; }
+        public string UserPhoneNumber { get; }
     }
 }

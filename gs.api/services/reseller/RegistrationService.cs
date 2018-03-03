@@ -29,16 +29,15 @@ namespace gs.api.services.reseller
             if (request == null) throw new ArgumentNullException(nameof(request));
 
             // add user
-            UserDb user = request.ConvertToUser();
-            var existingUser = Context.Users.FirstOrDefault(u => u.PhoneNumber == user.PhoneNumber);
-            if (existingUser != null)
+            if (IsUserExistsByPhone(request.UserPhoneNumber))
                 throw new UserAlreadyExistsException();
+            UserDb user = request.ConvertToUser();
             Context.Add(user);
             
             // add organization
-            var org = request.ConvertToOrganization();
-            if (IsOrgExistsByByTrademark(org.TradeMark) || IsOrganizationExistsByInn(org.Inn))
+            if (IsOrgExistsByByTrademark(request.OrganizationTrademark))
                 throw new OrganizationAlreadyExistsException();
+            var org = request.ConvertToOrganization();
             org.Owner = user;
             Context.Add(org);
             Context.SaveChanges();
@@ -51,20 +50,14 @@ namespace gs.api.services.reseller
             return new RegisterOrganizationResponse(user.Token);
         }
 
-        public IsOrganizationExistsResponse IsOrganizationExists([NotNull] IsOrganizationExistsRequest request)
+        public IsAccountExistsResponse IsAccountExists([NotNull] IsAccountExistsRequest request)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             bool byTrademark = IsOrgExistsByByTrademark(request.Trademark);
-            bool byInn = IsOrganizationExistsByInn(request.Inn);
-            return new IsOrganizationExistsResponse(byTrademark, byInn);
+            bool byPhone = IsUserExistsByPhone(request.UserPhoneNumber);
+            return new IsAccountExistsResponse(byTrademark, byPhone);
         }
 
-        public bool IsUserEmailExists([NotNull] IsUserEmailExistsRequest request)
-        {
-            if (request == null) throw new ArgumentNullException(nameof(request));
-            return Context.Users.Any(u => u.PhoneNumber == request.Email);
-        }
-        
         private bool IsOrgExistsByByTrademark(string tradeMark)
         {
             bool byTrademarkIe = Context.IeOrganizations.Any(o => o.TradeMark == tradeMark);
@@ -72,11 +65,9 @@ namespace gs.api.services.reseller
             return byTrademarkIe || byTrademarkLtd;
         }
         
-        private bool IsOrganizationExistsByInn(string inn)
+        private bool IsUserExistsByPhone(string userPhone)
         {
-            bool byInnIe = Context.IeOrganizations.Any(o => o.Inn == inn);
-            bool byInn = Context.LtdOrganizations.Any(o => o.Inn == inn);
-            return byInnIe || byInn;
+            return Context.Users.Any(u => u.PhoneNumber == userPhone);
         }
     }
 }

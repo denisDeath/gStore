@@ -18,11 +18,6 @@ namespace gs.api.contracts.reseller.services.interfaces
         /// <summary>
         /// Проверка, есть ли уже организация с указанным именем.
         /// </summary>
-        IsOrganizationExistsResponse IsOrganizationExists(IsOrganizationExistsRequest request);
-
-        /// <summary>
-        /// Проверка, есть ли уже пользователь с указанным email.
-        /// </summary>
-        bool IsUserEmailExists(IsUserEmailExistsRequest request);
+        IsAccountExistsResponse IsAccountExists(IsAccountExistsRequest request);
     }
 }

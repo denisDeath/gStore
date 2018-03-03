@@ -1,14 +1,12 @@
-﻿using System;
-using gs.api.contracts.reseller;
+﻿using gs.api.contracts.reseller;
 using gs.api.contracts.reseller.dto.registration;
 using gs.api.contracts.reseller.services.interfaces;
-using gs.api.contracts.suppliers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace gs.api.controllers.resellers
 {
     [Route("api/resellers/registration/[action]")]
-    public class RegistrationController : Controller
+    public class RegistrationController : Controller, IRegistrationService
     {
         private readonly IRegistrationService RegistrationService;
 
@@ -24,21 +22,9 @@ namespace gs.api.controllers.resellers
         }
 
         [HttpPost]
-        public IsOrganizationExistsResponse IsOrganizationExists([FromBody] IsOrganizationExistsRequest request)
+        public IsAccountExistsResponse IsAccountExists([FromBody] IsAccountExistsRequest request)
         {
-            return RegistrationService.IsOrganizationExists(request);
-        }
-
-        [HttpPost]
-        public bool IsUserEmailExists([FromBody] IsUserEmailExistsRequest request)
-        {
-            return RegistrationService.IsUserEmailExists(request);
-        }
-        
-        [HttpPost]
-        public AuthResponse Auth([FromBody] AuthRequest request)
-        {
-            throw new NotImplementedException();
+            return RegistrationService.IsAccountExists(request);
         }
     }
 }
