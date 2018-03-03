@@ -56,7 +56,7 @@ namespace gs.api.infrastructure
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Evotor API V1");
             });
-
+            
             CustomBindings.Use(app);
         }
     }

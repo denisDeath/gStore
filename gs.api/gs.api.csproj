@@ -5,11 +5,11 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
     <PackageReference Include="Microsoft.NETCore.App" Version="2.0.5" />
-    <!--<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />-->
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="1.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="1.1.0" />
@@ -22,7 +22,12 @@
     <Folder Include="Migrations" />
     <Folder Include="storage\repositories\postgres\scripts" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
   <PropertyGroup>
     <DocumentationFile>bin\Debug\netcoreapp2.0\gs.api.xml</DocumentationFile>
+    <ApplicationInsightsResourceId>/subscriptions/b0674ad0-fd41-4ca2-baf4-9fe1babd909d/resourcegroups/gStore_develop/providers/microsoft.insights/components/gs.api_develop</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/b0674ad0-fd41-4ca2-baf4-9fe1babd909d/resourcegroups/gStore_develop/providers/microsoft.insights/components/gs.api_develop</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 </Project>
