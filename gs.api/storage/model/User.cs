@@ -10,7 +10,7 @@ namespace gs.api.storage.model
         public long UserId { get; set; }
         
         [Required, MinLength(3), MaxLength(50)]
-        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
         
         [Required, MinLength(5), MaxLength(50)]
         public string Password { get; set; }

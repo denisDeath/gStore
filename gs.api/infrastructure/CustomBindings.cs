@@ -30,7 +30,7 @@ namespace gs.api.infrastructure
 
         private static void BindServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IRegistrationService, RegistrationService>();
+            services.AddTransient<IRegistrationService, RegistrationService>();
         }
 
         private static void BindSettings(IServiceCollection services, IConfiguration configuration, 
@@ -47,8 +47,6 @@ namespace gs.api.infrastructure
                 AddEntityFrameworkNpgsql()
                 .AddDbContext<Context>(options => options.UseNpgsql(dbSettings.ConnectionString));
 
-//            services.AddScoped<Context>();
-            
             services.AddTransient<IOrganizationsRepository, OrganizationsRepository>();
         }
         

@@ -10,7 +10,7 @@ using gs.api.storage;
 using JetBrains.Annotations;
 
 using OrganizationDb = gs.api.storage.model.Organization;
-using IeUserDb = gs.api.storage.model.User;
+using UserDb = gs.api.storage.model.User;
 
 namespace gs.api.services.reseller
 {
@@ -27,20 +27,23 @@ namespace gs.api.services.reseller
         public RegisterOrganizationResponse RegisterOrganization([NotNull] RegisterOrganizationRequest request)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            
-            var user = request.Owner.Convert();
-            var existingUser = Context.Users.FirstOrDefault(u => u.Email == user.Email);
+
+            // add user
+            UserDb user = request.ConvertToUser();
+            var existingUser = Context.Users.FirstOrDefault(u => u.PhoneNumber == user.PhoneNumber);
             if (existingUser != null)
                 throw new UserAlreadyExistsException();
             Context.Add(user);
             
-            var org = request.Organization.Convert();
+            // add organization
+            var org = request.ConvertToOrganization();
             if (IsOrgExistsByByTrademark(org.TradeMark) || IsOrganizationExistsByInn(org.Inn))
                 throw new OrganizationAlreadyExistsException();
             org.Owner = user;
             Context.Add(org);
             Context.SaveChanges();
             
+            // generate token
             byte[] bytes = Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
             user.Token = Convert.ToBase64String(bytes);
             user.TokenExpireDate = DateTime.UtcNow.AddMinutes(TokenExpirationInMinutes);
@@ -59,7 +62,7 @@ namespace gs.api.services.reseller
         public bool IsUserEmailExists([NotNull] IsUserEmailExistsRequest request)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            return Context.Users.Any(u => u.Email == request.Email);
+            return Context.Users.Any(u => u.PhoneNumber == request.Email);
         }
         
         private bool IsOrgExistsByByTrademark(string tradeMark)

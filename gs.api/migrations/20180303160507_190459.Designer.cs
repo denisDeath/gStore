@@ -11,9 +11,10 @@ using System;
 namespace gs.api.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20180303160507_190459")]
+    partial class _190459
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,14 +66,12 @@ namespace gs.api.Migrations
                     b.Property<string>("Inn")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Kpp")
-                        .HasMaxLength(50);
+                    b.Property<string>("Kpp");
 
                     b.Property<string>("Phone")
                         .HasMaxLength(50);
 
-                    b.Property<string>("ShortName")
-                        .HasMaxLength(50);
+                    b.Property<string>("ShortName");
 
                     b.Property<string>("TradeMark")
                         .IsRequired()
@@ -93,11 +92,11 @@ namespace gs.api.Migrations
                     b.Property<long>("UserId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(50);
 
