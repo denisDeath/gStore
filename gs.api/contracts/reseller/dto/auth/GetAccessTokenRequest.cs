@@ -1,18 +1,18 @@
 ﻿using System.Runtime.Serialization;
 
-namespace gs.api.contracts.reseller.auth
+namespace gs.api.contracts.reseller.dto.auth
 {
     [DataContract]
     public class GetAccessTokenRequest
     {
-        public GetAccessTokenRequest(string email, string password)
+        public GetAccessTokenRequest(string phoneNumber, string password)
         {
-            Email = email;
+            PhoneNumber = phoneNumber;
             Password = password;
         }
 
         [DataMember(IsRequired = true)]
-        public string Email { get; }
+        public string PhoneNumber { get; }
         
         [DataMember(IsRequired = true)]
         public string Password { get; }

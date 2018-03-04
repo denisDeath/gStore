@@ -17,11 +17,10 @@ namespace gs.api.services.reseller
     public class RegistrationService : IRegistrationService
     {
         private readonly Context Context;
-        private const uint TokenExpirationInMinutes = 10;
 
-        public RegistrationService(Context context)
+        public RegistrationService([NotNull] Context context, [NotNull] IAuthService authService)
         {
-            Context = context;
+            Context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public RegisterOrganizationResponse RegisterOrganization([NotNull] RegisterOrganizationRequest request)
@@ -43,9 +42,9 @@ namespace gs.api.services.reseller
             Context.SaveChanges();
             
             // generate token
-            byte[] bytes = Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
-            user.Token = Convert.ToBase64String(bytes);
-            user.TokenExpireDate = DateTime.UtcNow.AddMinutes(TokenExpirationInMinutes);
+            var newToken = AuthService.GenerateToken();
+            user.Token = newToken.Token;
+            user.TokenExpireDate = newToken.Expiration;
             Context.SaveChanges();
             return new RegisterOrganizationResponse(user.Token);
         }

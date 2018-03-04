@@ -31,6 +31,7 @@ namespace gs.api.infrastructure
         private static void BindServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IRegistrationService, RegistrationService>();
+            services.AddTransient<IAuthService, AuthService>();
         }
 
         private static void BindSettings(IServiceCollection services, IConfiguration configuration, 
