@@ -10,6 +10,15 @@ namespace gs.api.storage.model
         public long UserId { get; set; }
         
         [Required, MinLength(3), MaxLength(50)]
+        public string FirstName { get; set; }
+        
+        [MaxLength(50)]
+        public string LastName { get; set; }
+        
+        [MaxLength(50)]
+        public string Patronymic { get; set; }
+        
+        [Required, MinLength(3), MaxLength(50)]
         public string PhoneNumber { get; set; }
         
         [Required, MinLength(5), MaxLength(50)]

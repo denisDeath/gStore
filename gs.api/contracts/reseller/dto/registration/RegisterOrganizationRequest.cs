@@ -5,11 +5,14 @@ namespace gs.api.contracts.reseller.dto.registration
     [DataContract]
     public class RegisterOrganizationRequest
     {
-        public RegisterOrganizationRequest(string userPhoneNumber, string password, string organizationTrademark)
+        public RegisterOrganizationRequest(string userPhoneNumber, string password, string firstName, string lastame,
+            string patronymic)
         {
             UserPhoneNumber = userPhoneNumber;
             Password = password;
-            OrganizationTrademark = organizationTrademark;
+            FirstName = firstName;
+            Lastame = lastame;
+            Patronymic = patronymic;
         }
 
         [DataMember(IsRequired = true)]
@@ -19,6 +22,12 @@ namespace gs.api.contracts.reseller.dto.registration
         public string Password { get; }
         
         [DataMember(IsRequired = true)]
-        public string OrganizationTrademark { get; }
+        public string FirstName { get; }
+        
+        [DataMember(IsRequired = false)]
+        public string Lastame { get; }
+        
+        [DataMember(IsRequired = false)]
+        public string Patronymic { get; }
     }
 }

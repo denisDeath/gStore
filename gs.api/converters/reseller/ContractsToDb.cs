@@ -8,16 +8,16 @@ namespace gs.api.converters.reseller
     {
         public static IeOrganizationDb ConvertToOrganization(this RegisterOrganizationRequest source)
         {
-            return new IeOrganizationDb
-            {
-                TradeMark = source.OrganizationTrademark
-            };
+            return new IeOrganizationDb();
         }
 
         public static IeUserDb ConvertToUser(this RegisterOrganizationRequest source)
         {
             return new IeUserDb
             {
+                FirstName = source.FirstName,
+                LastName = source.Lastame,
+                Patronymic = source.Patronymic,
                 PhoneNumber = source.UserPhoneNumber,
                 Password = source.Password
             };

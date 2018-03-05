@@ -34,14 +34,12 @@ namespace gs.api.services.reseller
             Context.Add(user);
             
             // add organization
-            if (IsOrgExistsByByTrademark(request.OrganizationTrademark))
-                throw new OrganizationAlreadyExistsException();
             var org = request.ConvertToOrganization();
             org.Owner = user;
             Context.Add(org);
             Context.SaveChanges();
             
-            // generate token
+            // generate and save token
             var newToken = AuthService.GenerateToken();
             user.Token = newToken.Token;
             user.TokenExpireDate = newToken.Expiration;
@@ -52,16 +50,8 @@ namespace gs.api.services.reseller
         public IsAccountExistsResponse IsAccountExists([NotNull] IsAccountExistsRequest request)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            bool byTrademark = IsOrgExistsByByTrademark(request.Trademark);
             bool byPhone = IsUserExistsByPhone(request.UserPhoneNumber);
-            return new IsAccountExistsResponse(byTrademark, byPhone);
-        }
-
-        private bool IsOrgExistsByByTrademark(string tradeMark)
-        {
-            bool byTrademarkIe = Context.IeOrganizations.Any(o => o.TradeMark == tradeMark);
-            bool byTrademarkLtd = Context.LtdOrganizations.Any(o => o.TradeMark == tradeMark);
-            return byTrademarkIe || byTrademarkLtd;
+            return new IsAccountExistsResponse(byPhone);
         }
         
         private bool IsUserExistsByPhone(string userPhone)

@@ -1,4 +1,5 @@
-﻿using gs.api.contracts.reseller;
+﻿using System;
+using gs.api.contracts.reseller;
 using gs.api.contracts.reseller.dto.registration;
 using gs.api.contracts.reseller.services.interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,12 @@ namespace gs.api.controllers.resellers
         public IsAccountExistsResponse IsAccountExists([FromBody] IsAccountExistsRequest request)
         {
             return RegistrationService.IsAccountExists(request);
+        }
+        
+        [HttpPost]
+        public string Test()
+        {
+            return Guid.NewGuid().ToString();
         }
     }
 }
