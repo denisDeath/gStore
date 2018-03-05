@@ -21,11 +21,13 @@ namespace gs.api.infrastructure
             BindSettings(services, configuration, out var appSettings);
             BindServices(services, configuration);
             BindDatabase(services, configuration, appSettings);
+
+            services.AddScoped<CallContext>();
         }
         
         public static void Use(IApplicationBuilder app)
         {
-            InitializeDabatase(app);
+//            app.UseMiddleware<SetContextMiddleware>();
         }
 
         private static void BindServices(IServiceCollection services, IConfiguration configuration)
@@ -49,11 +51,6 @@ namespace gs.api.infrastructure
                 .AddDbContext<Context>(options => options.UseNpgsql(dbSettings.ConnectionString));
 
             services.AddTransient<IOrganizationsRepository, OrganizationsRepository>();
-        }
-        
-        private static void InitializeDabatase(IApplicationBuilder app)
-        {
-            
         }
     }
 }

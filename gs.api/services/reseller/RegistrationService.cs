@@ -7,6 +7,7 @@ using gs.api.contracts.reseller.dto.registration;
 using gs.api.contracts.reseller.services.interfaces;
 using gs.api.converters.reseller;
 using gs.api.storage;
+using gs.api.storage.model;
 using JetBrains.Annotations;
 
 using OrganizationDb = gs.api.storage.model.Organization;
@@ -53,10 +54,65 @@ namespace gs.api.services.reseller
             bool byPhone = IsUserExistsByPhone(request.UserPhoneNumber);
             return new IsAccountExistsResponse(byPhone);
         }
-        
+
+        public void SaveOrganizationSettings([NotNull] SaveOrganizationSettingsRequest request)
+        {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            var organization = GetOrganization(request.Token);
+            var user = organization.Owner;
+
+            user.FirstName = request.OwnerFirstName ?? user.FirstName;
+            user.LastName = request.OwnerLastName ?? user.LastName;
+            user.Patronymic = request.OwnerPatronymic ?? user.Patronymic;
+
+            organization.TradeMark = request.TradeMark ?? organization.TradeMark;
+            organization.FullName = request.FullName ?? organization.FullName;
+            organization.Address = request.Address ?? organization.Address;
+            organization.Phone = request.Phone ?? organization.Phone;
+            organization.Inn = request.Inn ?? organization.Inn;
+            organization.UseVat = request.UseVat ?? organization.UseVat;
+
+            Context.SaveChanges();
+        }
+
+        public void ChangePassword([NotNull] ChangePasswordRequest request)
+        {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            var organization = GetOrganization(request.Token);
+            organization.Owner.Password = request.NewPassword;
+            Context.SaveChanges();
+        }
+
+        public void ChangePhoneNumber([NotNull] ChangePhoneNumberRequest request)
+        {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            var organization = GetOrganization(request.Token);
+            if (organization.Owner.PhoneNumber == request.NewPhoneNumber)
+                return;
+
+            if (IsUserExistsByPhone(request.NewPhoneNumber))
+                throw new UserPhoneAlreadyInUseException();
+            
+            organization.Owner.PhoneNumber = request.NewPhoneNumber;
+            Context.SaveChanges();
+        }
+
         private bool IsUserExistsByPhone(string userPhone)
         {
             return Context.Users.Any(u => u.PhoneNumber == userPhone);
+        }
+        
+        [NotNull]
+        private IeOrganization GetOrganization(string token)
+        {
+            var user = Context.Users.FirstOrDefault(u => u.Token == token);
+            if (user == null)
+                throw new UnauthorizedException();
+
+            var organization = Context.IeOrganizations.FirstOrDefault(o => o.Owner.UserId == user.UserId);
+            if (organization == null)
+                throw new InvalidOperationException($"User with id {user.UserId} not owns any organization.");
+            return organization;
         }
     }
 }

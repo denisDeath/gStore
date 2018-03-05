@@ -28,5 +28,10 @@ namespace gs.api.storage.model
         /// </summary>
         [MaxLength(50)]
         public string Inn { get; set; }
+        
+        /// <summary>
+        /// Работает с НДС.
+        /// </summary>
+        public bool UseVat { get; set; }
     }
 }
