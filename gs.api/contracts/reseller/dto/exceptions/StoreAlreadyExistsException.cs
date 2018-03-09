@@ -7,7 +7,7 @@ namespace gs.api.contracts.reseller.dto.exceptions
     /// Исключение, говорящее, что магазин с указанным именем уже существует.
     /// </summary>
     [DataContract]
-    public class StoreAlreadyExistsException : Exception
+    public class StoreAlreadyExistsException : ApiException
     {
         
     }

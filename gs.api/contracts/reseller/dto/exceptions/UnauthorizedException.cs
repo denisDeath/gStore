@@ -7,7 +7,7 @@ namespace gs.api.contracts.reseller.dto.exceptions
     /// Исключение, выдаваемое, когда пользователь запросил недоступную ему операцию.
     /// </summary>
     [DataContract]
-    public class UnauthorizedException : Exception
+    public class UnauthorizedException : ApiException
     {
         public UnauthorizedException()
         {

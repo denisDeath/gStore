@@ -1,9 +1,11 @@
 ﻿using gs.api.contracts.reseller.services.interfaces;
+using gs.api.infrastructure.logging;
 using gs.api.infrastructure.settings;
 using gs.api.services.reseller;
 using gs.api.storage;
 using gs.api.storage.repositories;
 using gs.api.storage.repositories.interfaces;
+using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,11 +25,15 @@ namespace gs.api.infrastructure
             BindDatabase(services, configuration, appSettings);
 
             services.AddScoped<CallContext>();
+            services.AddTransient<TelemetryClient>();
+
+            services.AddTransient<ILog, ApplicationInsightsLogger>();
         }
         
         public static void Use(IApplicationBuilder app)
         {
 //            app.UseMiddleware<SetContextMiddleware>();
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
         }
 
         private static void BindServices(IServiceCollection services, IConfiguration configuration)

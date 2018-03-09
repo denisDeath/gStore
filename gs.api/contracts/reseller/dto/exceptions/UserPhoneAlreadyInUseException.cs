@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace gs.api.contracts.reseller.dto.exceptions
 {
     [DataContract]
-    public class UserPhoneAlreadyInUseException : Exception
+    public class UserPhoneAlreadyInUseException : ApiException
     {
         
     }
