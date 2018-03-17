@@ -1,3 +1,33 @@
-<p>
-  register works!
-</p>
+<h2>Регистрация организации.</h2>
+
+<div>
+  <label>Ваш телефон:
+    <input [(ngModel)]="Organization.UserPhoneNumber" placeholder="телефон">
+  </label>
+</div>
+
+<div>
+  <label>Придумайте пароль:
+    <input [(ngModel)]="Organization.Password" placeholder="пароль">
+  </label>
+</div>
+
+<div>
+  <label>Ваше имя:
+    <input [(ngModel)]="Organization.FirstName" placeholder="имя">
+  </label>
+</div>
+
+<div>
+  <label>Ваша фамилия:
+    <input [(ngModel)]="Organization.Lastame" placeholder="фамилия">
+  </label>
+</div>
+
+<div>
+  <label>Ваше отчество:
+    <input [(ngModel)]="Organization.Patronymic" placeholder="отчество">
+  </label>
+</div>
+
+<input type="button" value="Зарегистрироваться" (click)="Register();" />
