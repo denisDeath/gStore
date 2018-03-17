@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
-using gs.api.contracts.reseller.auth;
+using gs.api.auth;
 using gs.api.contracts.reseller.dto.auth;
 using gs.api.contracts.reseller.dto.exceptions;
 using gs.api.contracts.reseller.services.interfaces;
 using gs.api.storage;
+using gs.api.storage.model;
 using JetBrains.Annotations;
+using Microsoft.IdentityModel.Tokens;
 
 namespace gs.api.services.reseller
 {
@@ -22,25 +27,44 @@ namespace gs.api.services.reseller
 
         public GetAccessTokenResponse GetAccessToken(GetAccessTokenRequest request)
         {
-            var user = Context.Users.FirstOrDefault(u =>
-                u.PhoneNumber == request.PhoneNumber && u.Password == request.Password);
-            if (user == null)
-                throw new IncorrectAccessTokenRequestException();
-
-            if (String.IsNullOrWhiteSpace(user.Token)
-                || !user.TokenExpireDate.HasValue
-                || user.TokenExpireDate >= DateTime.Now)
-            {
-                // generate new token.
-                var newToken = GenerateToken();
-                user.Token = newToken.Token;
-                user.TokenExpireDate = newToken.Expiration;
-                Context.SaveChanges();
-            }
-
-            return new GetAccessTokenResponse(user.Token);
+            return GetAccessToken(request.PhoneNumber, request.Password);
         }
 
+        internal GetAccessTokenResponse GetAccessToken(string phoneNumber, string password)
+        {
+            ClaimsIdentity identity = GetIdentity(phoneNumber, password);
+            if (identity == null)
+                throw new IncorrectAccessTokenRequestException();
+
+            var now = DateTime.UtcNow;
+            // создаем JWT-токен
+            var jwt = new JwtSecurityToken(
+                issuer: AuthOptions.ISSUER,
+                audience: AuthOptions.AUDIENCE,
+                notBefore: now,
+                claims: identity.Claims,
+                expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
+                signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(),
+                    SecurityAlgorithms.HmacSha256));
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+            return new GetAccessTokenResponse(identity.Name, encodedJwt);
+        }
+
+        private ClaimsIdentity GetIdentity(string phoneNumber, string password)
+        {
+            User user = Context.Users.FirstOrDefault(x => x.PhoneNumber == phoneNumber && x.Password == password);
+            if (user == null) return null;
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.PhoneNumber),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, Roles.ResellerAdmin)
+            };
+            ClaimsIdentity claimsIdentity =
+                new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+                    ClaimsIdentity.DefaultRoleClaimType);
+            return claimsIdentity;
+        }
+        
         public static (string Token, DateTime Expiration) GenerateToken()
         {
             byte[] bytes = Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());

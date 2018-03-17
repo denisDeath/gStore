@@ -22,5 +22,7 @@ namespace gs.api.storage
         {
             optionsBuilder.UseNpgsql(connectionString: DbSettings.ConnectionString);
         }
+        
+        
     }
 }

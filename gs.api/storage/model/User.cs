@@ -25,11 +25,6 @@ namespace gs.api.storage.model
         public string Password { get; set; }
         
         /// <summary>
-        /// Токен для доступа к пользователю.
-        /// </summary>
-        public string Token { get; set; }
-        
-        /// <summary>
         /// Дата/время истечения времени жизни токена.
         /// </summary>
         public DateTime? TokenExpireDate { get; set; }

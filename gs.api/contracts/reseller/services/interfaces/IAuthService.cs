@@ -1,5 +1,4 @@
-﻿using gs.api.contracts.reseller.auth;
-using gs.api.contracts.reseller.dto.auth;
+﻿using gs.api.contracts.reseller.dto.auth;
 using gs.api.contracts.reseller.dto.exceptions;
 
 namespace gs.api.contracts.reseller.services.interfaces

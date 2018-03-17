@@ -1,5 +1,6 @@
 ﻿using gs.api.contracts.reseller.dto.exceptions;
 using gs.api.contracts.reseller.dto.registration;
+using gs.api.storage.model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace gs.api.contracts.reseller.services.interfaces
@@ -26,19 +27,19 @@ namespace gs.api.contracts.reseller.services.interfaces
         /// Настройка сохраняется только если соответствующее поле != null.
         /// </summary>
         [Throws(typeof(UnauthorizedException))]
-        void SaveOrganizationSettings(SaveOrganizationSettingsRequest request);
+        void SaveOrganizationSettings(SaveOrganizationSettingsRequest request, IeOrganization organization);
 
         /// <summary>
         /// Изменить пароль.
         /// </summary>
         [Throws(typeof(UnauthorizedException))]
-        void ChangePassword(ChangePasswordRequest request);
+        void ChangePassword(ChangePasswordRequest request, IeOrganization organization);
 
         /// <summary>
         /// Изменить номер телефона.
         /// </summary>
         [Throws(typeof(UnauthorizedException))]
         [Throws(typeof(UserPhoneAlreadyInUseException))]
-        void ChangePhoneNumber(ChangePhoneNumberRequest request);
+        void ChangePhoneNumber(ChangePhoneNumberRequest request, IeOrganization organization);
     }
 }
