@@ -1,0 +1,1 @@
+copy-item "..\src\app\web.config" "..\dist"
