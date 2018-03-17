@@ -29,6 +29,7 @@ namespace gs.api.services.reseller
 
         public RegisterOrganizationResponse RegisterOrganization([NotNull] RegisterOrganizationRequest request)
         {
+            return new RegisterOrganizationResponse("123", "toewr");
             if (request == null) throw new ArgumentNullException(nameof(request));
 
             // add user

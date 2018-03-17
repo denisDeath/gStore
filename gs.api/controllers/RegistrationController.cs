@@ -11,6 +11,7 @@ using gs.api.storage;
 using gs.api.storage.model;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace gs.api.controllers.resellers
@@ -30,6 +31,7 @@ namespace gs.api.controllers.resellers
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        [EnableCors("AllowAllOrigin")]
         [HttpPost]
         public RegisterOrganizationResponse RegisterOrganization([FromBody] RegisterOrganizationRequest request)
         {
