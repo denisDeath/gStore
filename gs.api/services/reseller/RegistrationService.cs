@@ -5,8 +5,8 @@ using gs.api.contracts.reseller.dto.exceptions;
 using gs.api.contracts.reseller.dto.registration;
 using gs.api.contracts.reseller.services.interfaces;
 using gs.api.converters.reseller;
+using gs.api.infrastructure;
 using gs.api.storage;
-using gs.api.storage.model;
 using JetBrains.Annotations;
 using OrganizationDb = gs.api.storage.model.Organization;
 using UserDb = gs.api.storage.model.User;
@@ -17,11 +17,14 @@ namespace gs.api.services.reseller
     {
         private readonly Context _context;
         private readonly IAuthService _authService;
+        private readonly CallContext _callContext;
 
-        public RegistrationService([NotNull] Context context, [NotNull] IAuthService authService)
+        public RegistrationService([NotNull] Context context, [NotNull] IAuthService authService, 
+            [NotNull] CallContext callContext)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _authService = authService ?? throw new ArgumentNullException(nameof(authService));
+            _callContext = callContext ?? throw new ArgumentNullException(nameof(callContext));
         }
 
         public RegisterOrganizationResponse RegisterOrganization([NotNull] RegisterOrganizationRequest request)
@@ -53,11 +56,10 @@ namespace gs.api.services.reseller
             return new IsAccountExistsResponse(byPhone);
         }
 
-        public void SaveOrganizationSettings([NotNull] SaveOrganizationSettingsRequest request,
-            [NotNull] IeOrganization organization)
+        public void SaveOrganizationSettings([NotNull] SaveOrganizationSettingsRequest request)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (organization == null) throw new ArgumentNullException(nameof(organization));
+            var organization = _callContext.OrganizationAndUser.Value.Organization;
             var user = organization.Owner;
 
             user.FirstName = request.OwnerFirstName ?? user.FirstName;
@@ -74,18 +76,18 @@ namespace gs.api.services.reseller
             _context.SaveChanges();
         }
 
-        public void ChangePassword([NotNull] ChangePasswordRequest request, [NotNull] IeOrganization organization)
+        public void ChangePassword([NotNull] ChangePasswordRequest request)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (organization == null) throw new ArgumentNullException(nameof(organization));
+            var organization = _callContext.OrganizationAndUser.Value.Organization;
             organization.Owner.Password = request.NewPassword;
             _context.SaveChanges();
         }
 
-        public void ChangePhoneNumber([NotNull] ChangePhoneNumberRequest request, [NotNull] IeOrganization organization)
+        public void ChangePhoneNumber([NotNull] ChangePhoneNumberRequest request)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            if (organization == null) throw new ArgumentNullException(nameof(organization));
+            var organization = _callContext.OrganizationAndUser.Value.Organization;
             if (organization.Owner.PhoneNumber == request.NewPhoneNumber)
                 return;
 
@@ -94,6 +96,11 @@ namespace gs.api.services.reseller
             
             organization.Owner.PhoneNumber = request.NewPhoneNumber;
             _context.SaveChanges();
+        }
+
+        public string Test()
+        {
+            return _callContext.OrganizationAndUser.Value.User.PhoneNumber;
         }
 
         private bool IsUserExistsByPhone(string userPhone)

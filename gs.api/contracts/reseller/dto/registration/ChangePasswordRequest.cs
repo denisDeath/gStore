@@ -5,7 +5,7 @@ namespace gs.api.contracts.reseller.dto.registration
     [DataContract]
     public class ChangePasswordRequest : BaseRequest
     {
-        public ChangePasswordRequest(string token, string newPassword) : base(token)
+        public ChangePasswordRequest(string newPassword)
         {
             NewPassword = newPassword;
         }

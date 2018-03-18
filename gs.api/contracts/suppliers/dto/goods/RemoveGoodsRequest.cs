@@ -6,7 +6,7 @@ namespace gs.api.contracts.suppliers.goods
     [DataContract]
     public class RemoveGoodsRequest : BaseRequest
     {
-        public RemoveGoodsRequest(string token, IEnumerable<GoodId> goodsToRemove) : base(token)
+        public RemoveGoodsRequest(string token, IEnumerable<GoodId> goodsToRemove) : base()
         {
             GoodsToRemove = goodsToRemove;
         }

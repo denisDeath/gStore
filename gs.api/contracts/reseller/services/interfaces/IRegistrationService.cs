@@ -27,19 +27,21 @@ namespace gs.api.contracts.reseller.services.interfaces
         /// Настройка сохраняется только если соответствующее поле != null.
         /// </summary>
         [Throws(typeof(UnauthorizedException))]
-        void SaveOrganizationSettings(SaveOrganizationSettingsRequest request, IeOrganization organization);
+        void SaveOrganizationSettings(SaveOrganizationSettingsRequest request);
 
         /// <summary>
         /// Изменить пароль.
         /// </summary>
         [Throws(typeof(UnauthorizedException))]
-        void ChangePassword(ChangePasswordRequest request, IeOrganization organization);
+        void ChangePassword(ChangePasswordRequest request);
 
         /// <summary>
         /// Изменить номер телефона.
         /// </summary>
         [Throws(typeof(UnauthorizedException))]
         [Throws(typeof(UserPhoneAlreadyInUseException))]
-        void ChangePhoneNumber(ChangePhoneNumberRequest request, IeOrganization organization);
+        void ChangePhoneNumber(ChangePhoneNumberRequest request);
+
+        string Test();
     }
 }

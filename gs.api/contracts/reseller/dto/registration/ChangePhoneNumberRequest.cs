@@ -5,7 +5,7 @@ namespace gs.api.contracts.reseller.dto.registration
     [DataContract]
     public class ChangePhoneNumberRequest : BaseRequest
     {
-        public ChangePhoneNumberRequest(string token, string newPhoneNumber) : base(token)
+        public ChangePhoneNumberRequest(string newPhoneNumber)
         {
             NewPhoneNumber = newPhoneNumber;
         }

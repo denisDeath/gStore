@@ -5,9 +5,9 @@ namespace gs.api.contracts.reseller.dto.registration
     [DataContract]
     public class SaveOrganizationSettingsRequest : BaseRequest
     {
-        public SaveOrganizationSettingsRequest(string token, string ownerFirstName, string ownerLastName,
+        public SaveOrganizationSettingsRequest(string ownerFirstName, string ownerLastName,
             string ownerPatronymic, string tradeMark, string fullName, string address, string phone, string inn,
-            bool? useVat) : base(token)
+            bool? useVat)
         {
             OwnerFirstName = ownerFirstName;
             OwnerLastName = ownerLastName;

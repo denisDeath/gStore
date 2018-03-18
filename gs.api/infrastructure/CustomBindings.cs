@@ -24,7 +24,7 @@ namespace gs.api.infrastructure
             BindServices(services, configuration);
             BindDatabase(services, configuration, appSettings);
 
-            services.AddScoped<CallContext>();
+            services.AddScoped(_ => new CallContext());
             services.AddTransient<TelemetryClient>();
 
             services.AddTransient<ILog, ApplicationInsightsLogger>();
@@ -33,7 +33,7 @@ namespace gs.api.infrastructure
         public static void Use(IApplicationBuilder app)
         {
             app.UseMiddleware<CorsMiddlewareStub>();
-//            app.UseMiddleware<SetContextMiddleware>();
+            app.UseMiddleware<SetContextMiddleware>();
             app.UseMiddleware<RequestResponseLoggingMiddleware>();
         }
 

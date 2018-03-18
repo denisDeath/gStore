@@ -6,7 +6,7 @@ namespace gs.api.contracts.suppliers.goods
     [DataContract]
     public class AddGoodRequest : BaseRequest
     {
-        public AddGoodRequest(string token, IEnumerable<Good> goodsToAdd) : base(token)
+        public AddGoodRequest(string token, IEnumerable<Good> goodsToAdd) : base()
         {
             GoodsToAdd = goodsToAdd;
         }

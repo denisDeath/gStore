@@ -19,8 +19,8 @@ namespace gs.api.controllers
             _authService = authService ?? throw new ArgumentNullException(nameof(authService));
         }
 
-        [HttpPost("/token")]
-        public async Task GetAccessToken([FromBody] GetAccessTokenRequest request)
+        [HttpPost]
+        public async Task Token([FromBody] GetAccessTokenRequest request)
         {
             try
             {

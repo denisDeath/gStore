@@ -46,7 +46,7 @@ namespace gs.api.infrastructure
                     };
                 });
             
-            services.AddMvc();
+            services.AddMvc().AddControllersAsServices();
             
             CustomBindings.Bind(services, Configuration);
         }
