@@ -32,6 +32,7 @@ namespace gs.api.infrastructure
         
         public static void Use(IApplicationBuilder app)
         {
+            app.UseMiddleware<CorsMiddlewareStub>();
 //            app.UseMiddleware<SetContextMiddleware>();
             app.UseMiddleware<RequestResponseLoggingMiddleware>();
         }

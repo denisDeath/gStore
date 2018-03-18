@@ -35,7 +35,6 @@ namespace gs.api.infrastructure
                                 $"Request:{requestString}.");
             try
             {
-                context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
                 var responseString = await context.GetResponseBody(next);
                 string responseHeaders = GetHeaders(context.Response.Headers);
                 var message = $"Action by uri {context.Request.Path} executed. " +
@@ -49,7 +48,7 @@ namespace gs.api.infrastructure
                 context.Response.Clear();
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
-                context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+//                context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
                 if (exc is ApiException)
                 {
                     context.Response.Headers.Add(ApiException.ApiExceptionHeaderSign, exc.GetType().FullName);

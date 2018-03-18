@@ -21,12 +21,6 @@ namespace gs.api.infrastructure
         [UsedImplicitly]
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAllOrigin",
-                    builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
-            });
-            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -52,8 +46,7 @@ namespace gs.api.infrastructure
                     };
                 });
             
-            services.AddMvcCore()
-                .AddJsonFormatters(x => x.Initialize());
+            services.AddMvc();
             
             CustomBindings.Bind(services, Configuration);
         }
@@ -62,7 +55,6 @@ namespace gs.api.infrastructure
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseAuthentication();
-            app.UseCors("AllowAllOrigin");
             CustomBindings.Use(app);
             app.UseMvc();
         }

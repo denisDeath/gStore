@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
-using gs.api.contracts.reseller;
 using gs.api.contracts.reseller.dto.auth;
 using gs.api.contracts.reseller.dto.exceptions;
 using gs.api.contracts.reseller.dto.registration;
@@ -10,7 +8,6 @@ using gs.api.converters.reseller;
 using gs.api.storage;
 using gs.api.storage.model;
 using JetBrains.Annotations;
-using Microsoft.AspNetCore.Http;
 using OrganizationDb = gs.api.storage.model.Organization;
 using UserDb = gs.api.storage.model.User;
 
@@ -29,7 +26,6 @@ namespace gs.api.services.reseller
 
         public RegisterOrganizationResponse RegisterOrganization([NotNull] RegisterOrganizationRequest request)
         {
-            return new RegisterOrganizationResponse("123", "toewr");
             if (request == null) throw new ArgumentNullException(nameof(request));
 
             // add user

@@ -31,7 +31,6 @@ namespace gs.api.controllers.resellers
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        [EnableCors("AllowAllOrigin")]
         [HttpPost]
         public RegisterOrganizationResponse RegisterOrganization([FromBody] RegisterOrganizationRequest request)
         {
