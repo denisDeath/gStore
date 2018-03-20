@@ -1,43 +1,28 @@
-<h2>Регистрация организации.</h2>
+<div class="text-center">
+  <div class="form-signin">
+    <h1 class="h3 mb-3 font-weight-normal">Регистрация организации</h1>
 
-<div>
-  <label>Ваш телефон:
-    <input [(ngModel)]="Organization.UserPhoneNumber" placeholder="телефон">
-  </label>
+    <label for="inputPhone" class="sr-only">Ваш телефон</label>
+    <input [(ngModel)]="Organization.UserPhoneNumber" id="inputPhone" class="form-control"
+           placeholder="ваш телефон" required="" autofocus="">
+
+    <label for="inputPassword" class="sr-only">Придумайте пароль</label>
+    <input [(ngModel)]="Organization.Password" type="password" id="inputPassword" class="form-control"
+           placeholder="ваш пароль" required="">
+
+    <label for="firstName" class="sr-only">Ваше имя</label>
+    <input [(ngModel)]="Organization.FirstName" placeholder="имя" id="firstName" class="form-control" required="">
+
+    <label for="lastame" class="sr-only">Ваша фамилия</label>
+    <input [(ngModel)]="Organization.Lastame" placeholder="фамилия" id="lastame" class="form-control" required="">
+
+    <label for="patronymic" class="sr-only">Ваше отчество</label>
+    <input [(ngModel)]="Organization.Patronymic" placeholder="отчество" id="patronymic" class="form-control" required="">
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="Register();" >Зарегистрироваться</button>
+    <nav>
+      <a routerLink="/login">У меня уже есть учётная запись.</a>
+    </nav>
+  </div>
 </div>
 
-<div>
-  <label>Придумайте пароль:
-    <input [(ngModel)]="Organization.Password" placeholder="пароль">
-  </label>
-</div>
-
-<div>
-  <label>Ваше имя:
-    <input [(ngModel)]="Organization.FirstName" placeholder="имя">
-  </label>
-</div>
-
-<div>
-  <label>Ваша фамилия:
-    <input [(ngModel)]="Organization.Lastame" placeholder="фамилия">
-  </label>
-</div>
-
-<div>
-  <label>Ваше отчество:
-    <input [(ngModel)]="Organization.Patronymic" placeholder="отчество">
-  </label>
-</div>
-
-<input type="button" value="Зарегистрироваться" (click)="Register();" />
-
-<ul>
-  <li *ngFor="let error of registerErrors">
-    <span>{{error}}</span>
-  </li>
-</ul>
-
-<nav>
-  <a routerLink="/login">У меня уже есть учётная запись.</a>
-</nav>
