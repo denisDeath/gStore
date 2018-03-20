@@ -9,13 +9,17 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from './auth.service';
 import { LoginComponent } from './login/login.component';
+import { SettingsComponent } from './settings/settings.component';
+import { GoodsComponent } from './dicts/goods/goods.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     MainComponent,
-    LoginComponent
+    LoginComponent,
+    SettingsComponent,
+    GoodsComponent
   ],
   imports: [
     BrowserModule,

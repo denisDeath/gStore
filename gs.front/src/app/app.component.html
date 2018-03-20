@@ -1,9 +1,53 @@
 <div id="top-of-page"></div>
 <!---->
 
-<div style="text-align:center">
-  <h1>
-    {{ title }}
-  </h1>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">{{ title }}</a>
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Поиск" aria-label="Поиск">
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap" *ngIf="IsAuthenticated()">
+      <a class="nav-link" (click)="Logout();">Выйти</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid" *ngIf="!IsAuthenticated()">
+  <!--this is for login/registration views -->
   <router-outlet></router-outlet>
+</div>
+
+<div class="container-fluid" *ngIf="IsAuthenticated()">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/main" [ngClass]="GetIsActiveClass('/main')" >
+              Главная
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dicts/goods"  [ngClass]="GetIsActiveClass('/dicts/goods')" >
+              Справочники / Товары
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" >
+              Документы
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/settings"  [ngClass]="GetIsActiveClass('/settings')" >
+              Настройки
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>

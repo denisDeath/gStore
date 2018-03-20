@@ -14,8 +14,6 @@ export class MainComponent implements OnInit {
     this.authService.RedirectToLoginPage();
   }
 
-  Logout() {
-    this.authService.Logout();
-  }
+
 
 }
