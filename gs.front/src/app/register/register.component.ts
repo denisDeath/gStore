@@ -10,15 +10,17 @@ import {Organization} from '../models/organization';
 export class RegisterComponent implements OnInit {
 
   Organization: Organization;
+  registerErrors: string[];
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.RedirectToMainPage();
     this.Organization = new Organization();
   }
 
   Register() {
     this.authService.Register(this.Organization)
-      .subscribe(response => console.log(response));
+      .subscribe(response => this.authService.RedirectToMainPage());
   }
 }

@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Http;
 namespace gs.api.infrastructure
 {
     /// <summary>
-    /// Заглушка для CORS, позволяющая любые вызовы.
-    /// Нужна, т.к. middleware из пакета Microsoft.AspNetCore.Cors почему-то работает только с методом OPTIONS.
+    /// Заглушка для CORS, обрабатывающая методы OPTIONS.
     /// </summary>
     public class CorsMiddlewareStub
     {
@@ -22,14 +21,11 @@ namespace gs.api.infrastructure
         [UsedImplicitly]
         public async Task Invoke(HttpContext context)
         {
-            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-            context.Response.Headers.Add("Access-Control-Allow-Headers", "*");
-            context.Response.Headers.Add("Access-Control-Allow-Methods", "*");
-
             if (context.Request.Method != HttpMethods.Options)
                 await next(context);
             else
             {
+                RequestResponseLoggingMiddleware.SetCorsHeaders(context);
                 context.Response.StatusCode = (int) HttpStatusCode.OK;
             }
         }

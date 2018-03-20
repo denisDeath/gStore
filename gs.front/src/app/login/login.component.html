@@ -1,0 +1,17 @@
+<div>
+  <label>Ваш телефон:
+    <input [(ngModel)]="UserPhoneNumber" placeholder="телефон">
+  </label>
+</div>
+
+<div>
+  <label>Ваш пароль:
+    <input [(ngModel)]="Password" placeholder="пароль">
+  </label>
+</div>
+
+<input type="button" value="Войти в систему" (click)="Login();" />
+
+<nav>
+  <a routerLink="/register">Нет учётной записи?</a>
+</nav>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Runtime.Serialization;
 using JetBrains.Annotations;
 
@@ -16,9 +17,10 @@ namespace gs.api.contracts
         /// </summary>
         public const string ApiExceptionHeaderSign = "ApiExceptionType";
         
-        public ApiException([CanBeNull] string message = null)
+        public ApiException(string message = null, HttpStatusCode? exceptionStatusCode = null)
             : base(message)
         {
+            ExceptionStatusCode = exceptionStatusCode ?? HttpStatusCode.BadRequest;
         }
 
         /// <summary>
@@ -27,12 +29,11 @@ namespace gs.api.contracts
         [CanBeNull]
         [DataMember]
         public override string Message => base.Message;
-
-//        /// <summary>
-//        /// Свойство-обёртка для базового свойства StackTrace. Необходимо для сериализации сообщения. 
-//        /// </summary>
-//        [CanBeNull]
-//        [DataMember]
-//        public override string StackTrace => base.StackTrace;
+        
+        /// <summary>
+        /// Http-код, с которым должен возвращаться ответ при текущем исключении.
+        /// По умолчанию 400.
+        /// </summary>
+        public HttpStatusCode ExceptionStatusCode { get; }
     }
 }

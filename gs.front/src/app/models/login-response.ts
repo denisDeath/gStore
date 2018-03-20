@@ -1,5 +1,4 @@
-export class RegisterResponse {
-
+export class LoginResponse {
   phoneNumber: string;
   token: string;
 

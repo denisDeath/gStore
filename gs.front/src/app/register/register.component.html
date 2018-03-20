@@ -31,3 +31,13 @@
 </div>
 
 <input type="button" value="Зарегистрироваться" (click)="Register();" />
+
+<ul>
+  <li *ngFor="let error of registerErrors">
+    <span>{{error}}</span>
+  </li>
+</ul>
+
+<nav>
+  <a routerLink="/login">У меня уже есть учётная запись.</a>
+</nav>

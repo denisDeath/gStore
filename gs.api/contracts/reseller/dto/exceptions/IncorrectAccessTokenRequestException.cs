@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Net;
 using System.Runtime.Serialization;
 using JetBrains.Annotations;
 
@@ -13,7 +13,7 @@ namespace gs.api.contracts.reseller.dto.exceptions
         public const string DefaultMessage = "Incorrect credentials were passed to get token.";
 
         public IncorrectAccessTokenRequestException([CanBeNull] string message = null) 
-            : base(message ?? DefaultMessage)
+            : base(message ?? DefaultMessage, HttpStatusCode.BadRequest)
         {
         }
     }

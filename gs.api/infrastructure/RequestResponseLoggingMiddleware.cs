@@ -35,6 +35,8 @@ namespace gs.api.infrastructure
                                 $"Request:{requestString}.");
             try
             {
+                SetCorsHeaders(context);
+                
                 var responseString = await context.GetResponseBody(next);
                 string responseHeaders = GetHeaders(context.Response.Headers);
                 var message = $"Action by uri {context.Request.Path} executed. " +
@@ -48,11 +50,11 @@ namespace gs.api.infrastructure
                 context.Response.Clear();
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
-//                context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-                if (exc is ApiException)
+                SetCorsHeaders(context);
+                if (exc is ApiException apiException)
                 {
                     context.Response.Headers.Add(ApiException.ApiExceptionHeaderSign, exc.GetType().FullName);
-
+                    context.Response.StatusCode = (int) apiException.ExceptionStatusCode;
                     var exceptionInfo = new
                     {
                         exceptionType = exc.GetType().Name,
@@ -72,6 +74,13 @@ namespace gs.api.infrastructure
         {
             IEnumerable<string> headersValues = heeaderDictionary.Select(h => $"{h.Key}: {h.Value.ToString()}");
             return String.Join(",", headersValues);
+        }
+
+        public static void SetCorsHeaders(HttpContext context)
+        {
+            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            context.Response.Headers.Add("Access-Control-Allow-Headers", "*");
+            context.Response.Headers.Add("Access-Control-Allow-Methods", "*");
         }
         
         #endregion
