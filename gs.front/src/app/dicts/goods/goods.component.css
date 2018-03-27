@@ -1,0 +1,25 @@
+.carouselImage{
+  width: 150px;
+  height: 150px;
+}
+
+.carouselInTable {
+  /*width: 200px;*/
+  /*margin: 0px;*/
+}
+
+.carouselColumn{
+  width: 200px;
+}
+
+.carousel-indicators {
+  visibility: hidden;
+}
+
+.carousel-control-prev {
+  visibility: hidden;
+}
+
+.carousel-control-next {
+  visibility: hidden;
+}

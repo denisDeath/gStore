@@ -65,9 +65,7 @@ export class AuthService {
   }
 
   IsAuthenticated(): boolean {
-    console.log('IsAuthenticated');
     const sessionToken = sessionStorage.getItem('token');
-    console.log(sessionToken !== null && sessionToken !== undefined);
     return sessionToken !== null && sessionToken !== undefined;
   }
 

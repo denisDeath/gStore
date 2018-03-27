@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <h4 class="modal-title">Редактирование товара.</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p *ngIf="isLoading">загрузка</p>
+
+  <div *ngIf="!isLoading">
+    <div class="form-group">
+      <label for="name">название</label>
+      <input class="form-control" id="name" placeholder="введите название" [(ngModel)]="editedGood.name">
+    </div>
+    <div class="form-group">
+      <label for="description">описание</label>
+      <input class="form-control" id="description" placeholder="введите описание" [(ngModel)]="editedGood.description">
+      <small class="form-text text-muted">Это описание будет видно покупателю в онлайн-витрине.</small>
+    </div>
+
+    <div class="form-group">
+      <label>изображения товара</label>
+      <td class="carouselColumn">
+        <ngb-carousel class="carouselInTable">
+          <ng-template ngbSlide *ngFor="let imageUri of editedGood.imageUris">
+            <img class="carouselImage" [src]="imageUri">
+          </ng-template>
+        </ngb-carousel>
+      </td>
+    </div>
+  </div>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="SaveAndClose()">сохранить</button>
+  <button type="button" class="btn btn-outline-dark" (click)="Close()">закрыть</button>
+</div>
