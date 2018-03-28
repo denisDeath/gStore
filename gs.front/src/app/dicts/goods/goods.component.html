@@ -1,9 +1,15 @@
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-  <div class="btn-group mr-2" role="group" aria-label="First group">
-    <button type="button" class="btn btn-secondary" (click)="AddGood()">добавить</button>
+  <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
+    <button type="button" class="btn btn-sm btn-secondary" (click)="AddGood()">
+      <i class="glyphicon glyphicon-plus"></i>
+      добавить
+    </button>
   </div>
-  <div class="btn-group mr-2" role="group" aria-label="Second group">
-    <button type="button" class="btn btn-secondary">обновить</button>
+  <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
+    <button type="button" class="btn btn-sm btn-secondary">
+      <i class="glyphicon glyphicon-refresh"></i>
+      обновить
+    </button>
   </div>
 </div>
 
@@ -12,8 +18,8 @@
     <tr>
       <th scope="col">Название</th>
       <th scope="col">Описание</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
+      <!--<th scope="col"></th>-->
+      <th class="goodActions" scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -21,21 +27,21 @@
       <td>{{good.name}}</td>
       <td>{{good.description}}</td>
 
-      <td class="carouselColumn">
-        <ngb-carousel class="carouselInTable">
-          <ng-template ngbSlide *ngFor="let imageUri of good.imageUris">
-            <img class="carouselImage" [src]="imageUri">
-          </ng-template>
-        </ngb-carousel>
-      </td>
-
+      <!--<td class="carouselColumn">-->
+        <!--<ngb-carousel class="carouselInTable">-->
+          <!--<ng-template ngbSlide *ngFor="let imageUri of good.imageUris">-->
+            <!--<img class="carouselImage" [src]="imageUri">-->
+          <!--</ng-template>-->
+        <!--</ngb-carousel>-->
+      <!--</td>-->
       <td>
-        <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-secondary" id="dropdownBasic1" ngbDropdownToggle>...</button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button (click)="EditGood(good.id)" class="dropdown-item">редактировать</button>
-            <button class="dropdown-item">удалить</button>
-          </div>
+        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-secondary" (click)="EditGood(good.id)">
+            <i class="glyphicon glyphicon-edit"></i>
+          </button>
+          <button type="button" class="btn btn-secondary">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
         </div>
       </td>
     </tr>

@@ -7,7 +7,10 @@
   <input class="form-control form-control-dark w-100" type="text" placeholder="Поиск" aria-label="Поиск">
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap" *ngIf="IsAuthenticated()">
-      <a class="nav-link" (click)="Logout();">Выйти</a>
+      <button type="button" class="btn btn-sm btn-secondary" (click)="Logout();">
+        <i class="glyphicon glyphicon-log-out"></i>
+        Выйти
+      </button>
     </li>
   </ul>
 </nav>

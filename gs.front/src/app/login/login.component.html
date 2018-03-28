@@ -3,14 +3,17 @@
     <h1 class="h3 mb-3 font-weight-normal">Вход в систему</h1>
 
     <label for="inputPhone" class="sr-only">Ваш телефон:</label>
-    <input [(ngModel)]="UserPhoneNumber" id="inputPhone" class="form-control"
+    <input [(ngModel)]="UserPhoneNumber" id="inputPhone" class="form-control form-control-sm"
            placeholder="ваш телефон" required="" autofocus="">
 
     <label for="inputPassword" class="sr-only">Ваш пароль</label>
-    <input [(ngModel)]="Password" type="password" id="inputPassword" class="form-control"
+    <input [(ngModel)]="Password" type="password" id="inputPassword" class="form-control form-control-sm"
            placeholder="ваш пароль" required="">
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="Login();" >Войти</button>
+    <button class="btn btn-sm btn-secondary btn-block" type="submit" (click)="Login();" >
+      <i class="glyphicon glyphicon-log-in"></i>
+      Войти
+    </button>
     <nav>
       <a routerLink="/register">Нет учётной записи?</a>
     </nav>

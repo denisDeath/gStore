@@ -3,23 +3,23 @@
     <h1 class="h3 mb-3 font-weight-normal">Регистрация организации</h1>
 
     <label for="inputPhone" class="sr-only">Ваш телефон</label>
-    <input [(ngModel)]="Organization.UserPhoneNumber" id="inputPhone" class="form-control"
+    <input [(ngModel)]="Organization.UserPhoneNumber" id="inputPhone" class="form-control form-control-sm"
            placeholder="ваш телефон" required="" autofocus="">
 
     <label for="inputPassword" class="sr-only">Придумайте пароль</label>
-    <input [(ngModel)]="Organization.Password" type="password" id="inputPassword" class="form-control"
+    <input [(ngModel)]="Organization.Password" type="password" id="inputPassword" class="form-control form-control-sm"
            placeholder="ваш пароль" required="">
 
     <label for="firstName" class="sr-only">Ваше имя</label>
-    <input [(ngModel)]="Organization.FirstName" placeholder="имя" id="firstName" class="form-control" required="">
+    <input [(ngModel)]="Organization.FirstName" placeholder="имя" id="firstName" class="form-control form-control-sm" required="">
 
     <label for="lastame" class="sr-only">Ваша фамилия</label>
-    <input [(ngModel)]="Organization.Lastame" placeholder="фамилия" id="lastame" class="form-control" required="">
+    <input [(ngModel)]="Organization.Lastame" placeholder="фамилия" id="lastame" class="form-control form-control-sm" required="">
 
     <label for="patronymic" class="sr-only">Ваше отчество</label>
-    <input [(ngModel)]="Organization.Patronymic" placeholder="отчество" id="patronymic" class="form-control" required="">
+    <input [(ngModel)]="Organization.Patronymic" placeholder="отчество" id="patronymic" class="form-control form-control-sm" required="">
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="Register();" >Зарегистрироваться</button>
+    <button class="btn btn-sm btn-secondary btn-block" type="submit" (click)="Register();" >Зарегистрироваться</button>
     <nav>
       <a routerLink="/login">У меня уже есть учётная запись.</a>
     </nav>

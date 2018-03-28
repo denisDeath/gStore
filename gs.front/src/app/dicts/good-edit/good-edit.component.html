@@ -14,20 +14,22 @@
     </div>
     <div class="form-group">
       <label for="description">описание</label>
-      <input class="form-control" id="description" placeholder="введите описание" [(ngModel)]="editedGood.description">
+      <textarea class="form-control" id="description" placeholder="введите описание"
+                [(ngModel)]="editedGood.description">
+      </textarea>
       <small class="form-text text-muted">Это описание будет видно покупателю в онлайн-витрине.</small>
     </div>
 
-    <div class="form-group">
-      <label>изображения товара</label>
-      <td class="carouselColumn">
-        <ngb-carousel class="carouselInTable">
-          <ng-template ngbSlide *ngFor="let imageUri of editedGood.imageUris">
-            <img class="carouselImage" [src]="imageUri">
-          </ng-template>
-        </ngb-carousel>
-      </td>
-    </div>
+    <!--<div class="form-group">-->
+      <!--<label>изображения товара</label>-->
+      <!--<td class="carouselColumn">-->
+        <!--<ngb-carousel class="carouselInTable">-->
+          <!--<ng-template ngbSlide *ngFor="let imageUri of editedGood.imageUris">-->
+            <!--<img class="carouselImage" [src]="imageUri">-->
+          <!--</ng-template>-->
+        <!--</ngb-carousel>-->
+      <!--</td>-->
+    <!--</div>-->
   </div>
 
 </div>
