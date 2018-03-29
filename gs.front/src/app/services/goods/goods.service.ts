@@ -24,24 +24,33 @@ export class GoodsService {
               private authService: AuthService) { }
 
   public GetGoods(): Observable<GetGoodsResponse> {
-    return this.http.post<GetGoodsResponse>(this.getGoodsUrl, {}, this.authService.GetHttpOptions()).pipe(
+    let options = {
+      headers: this.authService.getHttpHeaders()
+    };
+    return this.http.post<GetGoodsResponse>(this.getGoodsUrl, {}, options).pipe(
       catchError(this.authService.handleError<GetGoodsResponse>('GetGoods'))
     );
   }
 
   public AddGood(request: AddGoodRequest): Observable<AddGoodResponse> {
-    return this.http.post<AddGoodRequest>(this.addGoodsUrl, request, this.authService.GetHttpOptions()).pipe(
-      catchError(this.authService.handleError<AddGoodRequest>('AddGood'))
+    let options = {
+      headers: this.authService.getHttpHeaders()
+    };
+    return this.http.post<AddGoodResponse>(this.addGoodsUrl, request, options).pipe(
+      catchError(this.authService.handleError<AddGoodResponse>('AddGood'))
     );
   }
 
   public GetGoodDetails(request: GetGoodDetailsRequest): Observable<GetGoodDetailsResponse> {
-    return this.http.post<GetGoodDetailsRequest>(this.getGoodDetailsUrl, request, this.authService.GetHttpOptions()).pipe(
-      catchError(this.authService.handleError<GetGoodDetailsRequest>('GetGoodDetails'))
+    let options = {
+      headers: this.authService.getHttpHeaders()
+    };
+    return this.http.post<GetGoodDetailsResponse>(this.getGoodDetailsUrl, request, options).pipe(
+      catchError(this.authService.handleError<GetGoodDetailsResponse>('GetGoodDetails'))
     );
   }
 
-  public SaveGoodDetails(good: Good): Observable {
+  public SaveGoodDetails(good: Good): Observable<any> {
     return of();
   }
 }

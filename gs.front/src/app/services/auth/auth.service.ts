@@ -23,14 +23,20 @@ export class AuthService {
               private router: Router) { }
 
   Register(organization: Organization): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(this.registerUrl, organization, this.GetHttpOptions()).pipe(
+    let options = {
+      headers: this.getHttpHeaders()
+    };
+    return this.http.post<RegisterResponse>(this.registerUrl, organization, options).pipe(
       tap(regResponse => this.setAuthSessionKey(regResponse.token)),
       catchError(this.handleError<RegisterResponse>('Register'))
     );
   }
 
   Login(request: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(this.loginUrl, request, this.GetHttpOptions()).pipe(
+    let options = {
+      headers: this.getHttpHeaders()
+    };
+    return this.http.post<LoginResponse>(this.loginUrl, request, options).pipe(
       tap(loginResponse => this.setAuthSessionKey(loginResponse.token)),
       catchError(this.handleError<LoginResponse>('Login'))
     );
@@ -60,12 +66,6 @@ export class AuthService {
     return sessionToken !== null && sessionToken !== undefined;
   }
 
-  GetHttpOptions(): any {
-    return {
-      headers: this.getHttpHeaders()
-    };
-  }
-
   private setAuthSessionKey(value: string) {
     sessionStorage.setItem('token', value);
   }
@@ -88,7 +88,7 @@ export class AuthService {
     };
   }
 
-  private getHttpHeaders(): HttpHeaders {
+  public getHttpHeaders(): HttpHeaders {
     var result = new HttpHeaders({ 'Content-Type': 'application/json' });
     result = result.append('Access-Control-Allow-Origin', '*');
 
