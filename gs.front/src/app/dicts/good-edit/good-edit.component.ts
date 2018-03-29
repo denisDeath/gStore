@@ -4,6 +4,7 @@ import {Good} from "../../models/good";
 import {GoodsService} from "../../services/goods/goods.service";
 import {AddGoodRequest} from "../../models/add-good-request";
 import {GetGoodDetailsRequest} from "../../models/get-good-details-request";
+import {SaveGoodDetailsRequest} from "../../models/save-good-details-request";
 
 @Component({
   selector: 'app-good-edit',
@@ -50,10 +51,10 @@ export class GoodEditComponent implements OnInit {
         });
     }
     else {
-      this.goodsService.SaveGoodDetails(this.editedGood)
+      this.goodsService.SaveGoodDetails(new SaveGoodDetailsRequest(this.editedGood))
         .subscribe(() => {
           this.isLoading = false;
-          this.activeModal.close('Close click');
+          this.activeModal.close(this.editedGood);
         });
     }
   }

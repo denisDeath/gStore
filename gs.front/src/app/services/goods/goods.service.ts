@@ -13,6 +13,7 @@ import {AddGoodResponse} from "../../models/add-good-response";
 import {GetGoodDetailsResponse} from "../../models/get-good-details-response";
 import {GetGoodDetailsRequest} from "../../models/get-good-details-request";
 import {RemoveGoodsRequest} from "../../models/remove-goods-request";
+import {SaveGoodDetailsRequest} from "../../models/save-good-details-request";
 
 @Injectable()
 export class GoodsService {
@@ -21,6 +22,7 @@ export class GoodsService {
   private addGoodsUrl = environment.apiServerAddress + '/api/resellers/goods/list/addGood';
   private removeGoodsUrl = environment.apiServerAddress + '/api/resellers/goods/list/removeGoods';
   private getGoodDetailsUrl = environment.apiServerAddress + '/api/resellers/goods/list/getGoodDetails';
+  private saveGoodDetailsUrl = environment.apiServerAddress + '/api/resellers/goods/list/saveGoodDetails';
 
   constructor(private http: HttpClient,
               private authService: AuthService) { }
@@ -61,7 +63,12 @@ export class GoodsService {
     );
   }
 
-  public SaveGoodDetails(good: Good): Observable<any> {
-    return of();
+  public SaveGoodDetails(request: SaveGoodDetailsRequest): Observable<any> {
+    let options = {
+      headers: this.authService.getHttpHeaders()
+    };
+    return this.http.post(this.saveGoodDetailsUrl, request, options).pipe(
+      catchError(this.authService.handleError<any>('SaveGoodDetails'))
+    );
   }
 }

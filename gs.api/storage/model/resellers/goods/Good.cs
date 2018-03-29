@@ -56,5 +56,15 @@ namespace gs.api.storage.model.resellers.goods
         public string VendorCode { get; set; }
         
         public string Unit { get; set; }
+
+        public void UpdateFieldsFrom(Good source)
+        {
+            Name = source.Name;
+            Description = source.Description;
+            ImageUris = source.ImageUris;
+            Barcode = source.Barcode;
+            VendorCode = source.VendorCode;
+            Unit = source.Unit;
+        }
     }
 }

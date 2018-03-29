@@ -46,6 +46,11 @@ export class GoodsComponent implements OnInit {
   public EditGood(goodId: number) {
     const modalRef = this.modalService.open(GoodEditComponent);
     modalRef.componentInstance.goodId = goodId;
+
+    modalRef.result.then(editedGood => {
+      this.goods.splice(this.getGoodIndexById(goodId), 1);
+      this.goods.push(editedGood);
+    });
   }
 
   public AddGood() {
@@ -64,13 +69,16 @@ export class GoodsComponent implements OnInit {
     this.goodsService.RemoveGoods(new RemoveGoodsRequest([goodId]))
       .subscribe(_ => {
         this.isLoading = false;
-
-        let index = this.goods.findIndex((g, _, __) => {
-          if (g.id == goodId){
-            return true;
-          }
-        });
-        this.goods.splice(index, 1);
+        this.goods.splice(this.getGoodIndexById(goodId), 1);
       });
+  }
+
+  private getGoodIndexById(goodId: number): number {
+    let index = this.goods.findIndex((g, _, __) => {
+      if (g.id == goodId){
+        return true;
+      }
+    });
+    return index;
   }
 }
