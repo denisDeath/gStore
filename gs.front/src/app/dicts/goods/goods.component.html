@@ -42,7 +42,8 @@
                   ngbTooltip="редактировать">
             <i class="glyphicon glyphicon-edit"></i>
           </button>
-          <button type="button" class="btn btn-secondary" placement="top" ngbTooltip="удалить">
+          <button type="button" class="btn btn-secondary" placement="top" ngbTooltip="удалить"  placement="top"
+                  ngbTooltip="удалить" (click)="RemoveGood(good.id)">
             <i class="glyphicon glyphicon-remove"></i>
           </button>
         </div>

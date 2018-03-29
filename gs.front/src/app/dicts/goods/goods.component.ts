@@ -6,6 +6,7 @@ import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 import { ViewEncapsulation } from '@angular/core'
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {GoodEditComponent} from "../good-edit/good-edit.component";
+import {RemoveGoodsRequest} from "../../models/remove-goods-request";
 
 @Component({
   selector: 'app-goods',
@@ -52,5 +53,24 @@ export class GoodsComponent implements OnInit {
     modalRef.result.then(newGood => {
       this.goods.push(newGood);
     });
+  }
+
+  public RemoveGood(goodId: number) {
+    if (!confirm('Вы хотите удалить товар?')) {
+      return;
+    }
+
+    this.isLoading = true;
+    this.goodsService.RemoveGoods(new RemoveGoodsRequest([goodId]))
+      .subscribe(_ => {
+        this.isLoading = false;
+
+        let index = this.goods.findIndex((g, _, __) => {
+          if (g.id == goodId){
+            return true;
+          }
+        });
+        this.goods.splice(index, 1);
+      });
   }
 }

@@ -12,12 +12,14 @@ import {AddGoodRequest} from "../../models/add-good-request";
 import {AddGoodResponse} from "../../models/add-good-response";
 import {GetGoodDetailsResponse} from "../../models/get-good-details-response";
 import {GetGoodDetailsRequest} from "../../models/get-good-details-request";
+import {RemoveGoodsRequest} from "../../models/remove-goods-request";
 
 @Injectable()
 export class GoodsService {
 
   private getGoodsUrl = environment.apiServerAddress + '/api/resellers/goods/list/getGoods';
   private addGoodsUrl = environment.apiServerAddress + '/api/resellers/goods/list/addGood';
+  private removeGoodsUrl = environment.apiServerAddress + '/api/resellers/goods/list/removeGoods';
   private getGoodDetailsUrl = environment.apiServerAddress + '/api/resellers/goods/list/getGoodDetails';
 
   constructor(private http: HttpClient,
@@ -38,6 +40,15 @@ export class GoodsService {
     };
     return this.http.post<AddGoodResponse>(this.addGoodsUrl, request, options).pipe(
       catchError(this.authService.handleError<AddGoodResponse>('AddGood'))
+    );
+  }
+
+  public RemoveGoods(request: RemoveGoodsRequest): Observable<any> {
+    let options = {
+      headers: this.authService.getHttpHeaders()
+    };
+    return this.http.post<RemoveGoodsRequest>(this.removeGoodsUrl, request, options).pipe(
+      catchError(this.authService.handleError<RemoveGoodsRequest>('RemoveGoods'))
     );
   }
 
