@@ -12,12 +12,14 @@ namespace gs.api.infrastructure
         private readonly object _initSyncRoot = new object();
 
         public Guid CorrelationId { get; private set; }
-        public Lazy<(IeOrganization Organization, User User)> OrganizationAndUser { get; private set; }
+        public Lazy<(Organization Organization, User User)> OrganizationAndUser { get; private set; }
+        public long CurrentOrganizationId => OrganizationAndUser.Value.Organization.OrganizationId;
+        
         public Context DbContext { get; private set; }
 
         internal void Initialize(Guid correlationId, 
             [NotNull] Context dbContext, 
-            [NotNull] Lazy<(IeOrganization Organization, User User)> organizationAndUser)
+            [NotNull] Lazy<(Organization Organization, User User)> organizationAndUser)
         {
             if (dbContext == null) throw new ArgumentNullException(nameof(dbContext));
             if (organizationAndUser == null) throw new ArgumentNullException(nameof(organizationAndUser));

@@ -1,10 +1,21 @@
-﻿namespace gs.api.storage.model.resellers.goods
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using JetBrains.Annotations;
+
+namespace gs.api.storage.model.resellers.goods
 {
     public class Good
     {
-        public Good(long id, string name, string description, string imageUris, string barcode, string vendorCode,
-            string unit)
+        [UsedImplicitly]
+        public Good() { }
+        
+        public Good(long ownerId, long id, string name, string description, string imageUris, string barcode,
+            string vendorCode, string unit)
         {
+            Owner = new Organization
+            {
+                OrganizationId = ownerId
+            };
             Id = id;
             Name = name;
             Description = description;
@@ -14,11 +25,18 @@
             Unit = unit;
         }
 
-        public Good()
+        public Good(long ownerId)
         {
-            
+            Owner = new Organization
+            {
+                OrganizationId = ownerId
+            };
         }
         
+        [Required, ForeignKey(nameof(Organization.OrganizationId))]
+        public Organization Owner { get; set; }
+        
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
         public long Id { get; set; }
         
         public string Name { get; set; }

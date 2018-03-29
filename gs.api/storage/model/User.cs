@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace gs.api.storage.model
@@ -23,10 +22,5 @@ namespace gs.api.storage.model
         
         [Required, MinLength(5), MaxLength(50)]
         public string Password { get; set; }
-        
-        /// <summary>
-        /// Дата/время истечения времени жизни токена.
-        /// </summary>
-        public DateTime? TokenExpireDate { get; set; }
     }
 }

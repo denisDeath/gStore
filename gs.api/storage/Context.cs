@@ -16,8 +16,7 @@ namespace gs.api.storage
             DbSettings = dbSettings ?? throw new ArgumentNullException(nameof(dbSettings));
         }
         
-        public DbSet<LtdOrganization> LtdOrganizations { get; set; }
-        public DbSet<IeOrganization> IeOrganizations { get; set; }
+        public DbSet<Organization> Organizations { get; set; }
         public DbSet<User> Users { get; set; }
         
         public DbSet<Good> Goods { get; set; }

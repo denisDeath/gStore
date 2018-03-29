@@ -11,9 +11,10 @@ using System;
 namespace gs.api.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20180329222935_012927")]
+    partial class _012927
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,6 +39,7 @@ namespace gs.api.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("TradeMark")
+                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<bool>("UseVat");

@@ -34,13 +34,13 @@ namespace gs.api.infrastructure
                 correlationId = Guid.Parse(corrId[0]);
 
             // set current organization and user.
-            var currentOrganization = new Lazy<(IeOrganization, User)>(() => GetCurrentOrganization(context, dbContext));
+            var currentOrganization = new Lazy<(Organization, User)>(() => GetCurrentOrganization(context, dbContext));
 
             sessionContext.Initialize(correlationId, dbContext, currentOrganization);
             await _next(context);
         }
         
-        private (IeOrganization Organization, User User) GetCurrentOrganization(HttpContext context, Context dbContext)
+        private (Organization Organization, User User) GetCurrentOrganization(HttpContext context, Context dbContext)
         {
             Claim currentPhoneClaim =
                 context.User.Claims.FirstOrDefault(c => c.Type == ClaimsIdentity.DefaultNameClaimType);
@@ -51,7 +51,7 @@ namespace gs.api.infrastructure
             if (user == null)
                 throw new UnauthorizedException();
 
-            var organization = dbContext.IeOrganizations.FirstOrDefault(o => o.Owner.UserId == user.UserId);
+            var organization = dbContext.Organizations.FirstOrDefault(o => o.Owner.UserId == user.UserId);
             if (organization == null)
                 throw new InvalidOperationException($"User with id {user.UserId} not owns any organization.");
             return (organization, user);

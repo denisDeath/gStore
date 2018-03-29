@@ -1,7 +1,7 @@
 ﻿using System;
 using gs.api.contracts.reseller.dto.goods;
 using gs.api.contracts.reseller.dto.registration;
-using IeOrganizationDb = gs.api.storage.model.IeOrganization;
+using OrganizationDb = gs.api.storage.model.Organization;
 using IeUserDb = gs.api.storage.model.User;
 using GoodDb = gs.api.storage.model.resellers.goods.Good;
 
@@ -9,9 +9,9 @@ namespace gs.api.converters.reseller
 {
     public static class ContractsToDb
     {
-        public static IeOrganizationDb ConvertToOrganization(this RegisterOrganizationRequest source)
+        public static OrganizationDb ConvertToOrganization(this RegisterOrganizationRequest source)
         {
-            return new IeOrganizationDb();
+            return new OrganizationDb();
         }
 
         public static IeUserDb ConvertToUser(this RegisterOrganizationRequest source)
@@ -26,9 +26,9 @@ namespace gs.api.converters.reseller
             };
         }
 
-        public static GoodDb ConvertToGood(this Good source)
+        public static GoodDb ConvertToGood(this Good source, long ownerId)
         {
-            return new GoodDb(source.Id, source.Name,
+            return new GoodDb(ownerId, source.Id, source.Name,
                 source.Description,
                 String.Join(';', source.ImageUris),
                 source.Barcode,

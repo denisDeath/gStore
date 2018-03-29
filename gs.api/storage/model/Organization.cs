@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace gs.api.storage.model
 {
-    public abstract class Organization
+    public class Organization
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
         public long OrganizationId { get; set; }
@@ -11,7 +11,7 @@ namespace gs.api.storage.model
         [Required, ForeignKey(nameof(User.UserId))]
         public User Owner { get; set; }
         
-        [Required, MinLength(3), MaxLength(50)]
+        [MinLength(3), MaxLength(50)]
         public string TradeMark { get; set; }
         
         [MaxLength(50)]
