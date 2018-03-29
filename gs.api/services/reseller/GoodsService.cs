@@ -53,9 +53,19 @@ namespace gs.api.services.reseller
             _context.SaveChanges();
         }
 
-        public void SaveGoodDetails(SaveGoodDetailsRequest request)
+        public void SaveGoodDetails([NotNull] SaveGoodDetailsRequest request)
         {
-            throw new System.NotImplementedException();
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
+            var goodFromDb = _context.Goods
+                .FirstOrDefault(g => g.Id == request.Good.Id
+                                     && g.Owner.OrganizationId == _callContext.CurrentOrganizationId);
+            if (goodFromDb == null)
+                throw new InvalidOperationException($"Good with id {request.Good.Id} not found.");
+
+            var changedDbGood = request.Good.ConvertToGood(_callContext.CurrentOrganizationId);
+            goodFromDb.UpdateFieldsFrom(changedDbGood);
+            _context.SaveChanges();
         }
 
         public GetGoodDetailsResponse GetGoodDetails([NotNull] GetGoodDetailsRequest request)
