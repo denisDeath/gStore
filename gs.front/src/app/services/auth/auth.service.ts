@@ -66,6 +66,11 @@ export class AuthService {
     return sessionToken !== null && sessionToken !== undefined;
   }
 
+  GetToken(): string {
+    const sessionToken = sessionStorage.getItem('token');
+    return sessionToken || null;
+  }
+
   private setAuthSessionKey(value: string) {
     sessionStorage.setItem('token', value);
   }

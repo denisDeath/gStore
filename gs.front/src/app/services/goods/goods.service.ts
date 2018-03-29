@@ -28,19 +28,13 @@ export class GoodsService {
               private authService: AuthService) { }
 
   public GetGoods(): Observable<GetGoodsResponse> {
-    let options = {
-      headers: this.authService.getHttpHeaders()
-    };
-    return this.http.post<GetGoodsResponse>(this.getGoodsUrl, {}, options).pipe(
+    return this.http.post<GetGoodsResponse>(this.getGoodsUrl, {}).pipe(
       catchError(this.authService.handleError<GetGoodsResponse>('GetGoods'))
     );
   }
 
   public AddGood(request: AddGoodRequest): Observable<AddGoodResponse> {
-    let options = {
-      headers: this.authService.getHttpHeaders()
-    };
-    return this.http.post<AddGoodResponse>(this.addGoodsUrl, request, options).pipe(
+    return this.http.post<AddGoodResponse>(this.addGoodsUrl, request).pipe(
       catchError(this.authService.handleError<AddGoodResponse>('AddGood'))
     );
   }
@@ -55,10 +49,7 @@ export class GoodsService {
   }
 
   public GetGoodDetails(request: GetGoodDetailsRequest): Observable<GetGoodDetailsResponse> {
-    let options = {
-      headers: this.authService.getHttpHeaders()
-    };
-    return this.http.post<GetGoodDetailsResponse>(this.getGoodDetailsUrl, request, options).pipe(
+    return this.http.post<GetGoodDetailsResponse>(this.getGoodDetailsUrl, request).pipe(
       catchError(this.authService.handleError<GetGoodDetailsResponse>('GetGoodDetails'))
     );
   }
