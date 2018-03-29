@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {Good} from "../../models/good";
-import {GoodsService} from "../../services/goods.service";
+import {GoodsService} from "../../services/goods/goods.service";
+import {AddGoodRequest} from "../../models/add-good-request";
+import {GetGoodDetailsRequest} from "../../models/get-good-details-request";
 
 @Component({
   selector: 'app-good-edit',
@@ -19,17 +21,15 @@ export class GoodEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.goodId);
+    this.editedGood = new Good();
     if (this.goodId == undefined) {
-      console.log('created');
-      this.editedGood = new Good();
       this.isLoading = false;
       return;
     }
 
     this.isLoading = true;
-    this.goodsService.GetGoodDetails(this.goodId).subscribe(good => {
-      this.editedGood = good;
+    this.goodsService.GetGoodDetails(new GetGoodDetailsRequest(this.goodId)).subscribe(goodResponse => {
+      this.editedGood = goodResponse.goodDetails;
       this.isLoading = false;
     })
   }
@@ -39,6 +39,22 @@ export class GoodEditComponent implements OnInit {
   }
 
   public SaveAndClose() {
-    this.activeModal.close('Close click')
+    this.isLoading = true;
+    if (this.goodId == undefined) {
+      // new good
+      this.goodsService.AddGood(new AddGoodRequest(this.editedGood))
+        .subscribe(addGoodResponse => {
+          this.isLoading = false;
+          this.editedGood.id = addGoodResponse.addedGoodId;
+          this.activeModal.close(this.editedGood);
+        });
+    }
+    else {
+      this.goodsService.SaveGoodDetails(this.editedGood)
+        .subscribe(() => {
+          this.isLoading = false;
+          this.activeModal.close('Close click');
+        });
+    }
   }
 }

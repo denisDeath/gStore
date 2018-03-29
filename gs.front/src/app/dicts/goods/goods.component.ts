@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {GoodsService} from "../../services/goods.service";
+import {GoodsService} from "../../services/goods/goods.service";
 import {Good} from "../../models/good";
 import {Observable} from "rxjs/Observable";
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -17,22 +17,29 @@ import {GoodEditComponent} from "../good-edit/good-edit.component";
 export class GoodsComponent implements OnInit {
 
   goods: Good[];
+  isLoading: boolean;
 
   constructor(config: NgbCarouselConfig,
               private goodsService: GoodsService,
               private modalService: NgbModal) {
     // customize default values of carousels used by this component tree
-    console.log('asdfhasldkjg');
-    console.log(config);
-
     config.interval = 3000;
     config.wrap = true;
     config.keyboard = false;
   }
 
   ngOnInit() {
+    this.LoadGoods();
+  }
+
+  public LoadGoods() {
+    this.isLoading = true;
+    this.goods = [];
     this.goodsService.GetGoods()
-      .subscribe(goods => this.goods = goods);
+      .subscribe(getGoodsResponse => {
+        this.isLoading = false;
+        this.goods = getGoodsResponse.goods;
+      });
   }
 
   public EditGood(goodId: number) {
@@ -42,5 +49,8 @@ export class GoodsComponent implements OnInit {
 
   public AddGood() {
     const modalRef = this.modalService.open(GoodEditComponent);
+    modalRef.result.then(newGood => {
+      this.goods.push(newGood);
+    });
   }
 }

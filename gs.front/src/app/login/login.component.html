@@ -10,7 +10,9 @@
     <input [(ngModel)]="Password" type="password" id="inputPassword" class="form-control form-control-sm"
            placeholder="ваш пароль" required="">
 
-    <button class="btn btn-sm btn-secondary btn-block" type="submit" (click)="Login();" >
+    <button class="btn btn-sm btn-secondary btn-block" type="submit" (click)="Login();"
+            [ngClass]="{'disabled': isLoading}">
+      <img src="assets\images\loader.gif" class="loaderGif" [style.visibility]="isLoading ? 'visible' : 'hidden'" />
       <i class="glyphicon glyphicon-log-in"></i>
       Войти
     </button>

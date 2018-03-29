@@ -8,11 +8,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import {AuthService} from './auth.service';
+import {AuthService} from './services/auth/auth.service';
 import { LoginComponent } from './login/login.component';
 import { SettingsComponent } from './settings/settings.component';
 import { GoodsComponent } from './dicts/goods/goods.component';
-import {GoodsService} from "./services/goods.service";
+import {GoodsService} from "./services/goods/goods.service";
 import { GoodEditComponent } from './dicts/good-edit/good-edit.component';
 
 @NgModule({

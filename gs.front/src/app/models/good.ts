@@ -4,6 +4,17 @@ export class Good {
   name: string;
   description: string;
   imageUris: string[];
+  barcode: string;
+  vendorCode: string;
+  unit: string;
 
-  constructor() {}
+  constructor() {
+    this.id = 0;
+    this.name = "";
+    this.description = "";
+    this.imageUris = [];
+    this.barcode = "";
+    this.vendorCode = "";
+    this.unit = "";
+  }
 }

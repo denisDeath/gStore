@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Organization} from './models/organization';
+import {Organization} from '../../models/organization';
 import {Observable} from 'rxjs/Observable';
 import {catchError, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
-import {RegisterResponse} from './models/register-response';
-import {environment} from '../environments/environment';
+import {RegisterResponse} from '../../models/register-response';
+import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
-import {LoginResponse} from './models/login-response';
-import {LoginRequest} from './models/login-request';
+import {LoginResponse} from '../../models/login-response';
+import {LoginRequest} from '../../models/login-request';
 
 @Injectable()
 export class AuthService {
@@ -23,22 +23,14 @@ export class AuthService {
               private router: Router) { }
 
   Register(organization: Organization): Observable<RegisterResponse> {
-    const httpOptions = {
-      headers: this.getHttpHeaders()
-    };
-    return this.http.post<RegisterResponse>(this.registerUrl, organization, httpOptions).pipe(
-      tap(regResponse => console.log(regResponse)),
+    return this.http.post<RegisterResponse>(this.registerUrl, organization, this.GetHttpOptions()).pipe(
       tap(regResponse => this.setAuthSessionKey(regResponse.token)),
       catchError(this.handleError<RegisterResponse>('Register'))
     );
   }
 
   Login(request: LoginRequest): Observable<LoginResponse> {
-    const httpOptions = {
-      headers: this.getHttpHeaders()
-    };
-    return this.http.post<LoginResponse>(this.loginUrl, request, httpOptions).pipe(
-      tap(loginResponse => console.log(loginResponse)),
+    return this.http.post<LoginResponse>(this.loginUrl, request, this.GetHttpOptions()).pipe(
       tap(loginResponse => this.setAuthSessionKey(loginResponse.token)),
       catchError(this.handleError<LoginResponse>('Login'))
     );
@@ -58,7 +50,6 @@ export class AuthService {
   }
 
   RedirectToMainPage() {
-    console.log('RedirectToMainPage');
     if (this.IsAuthenticated()) {
       this.router.navigate([this.mainRoute]);
     }
@@ -69,6 +60,12 @@ export class AuthService {
     return sessionToken !== null && sessionToken !== undefined;
   }
 
+  GetHttpOptions(): any {
+    return {
+      headers: this.getHttpHeaders()
+    };
+  }
+
   private setAuthSessionKey(value: string) {
     sessionStorage.setItem('token', value);
   }
@@ -77,7 +74,7 @@ export class AuthService {
     sessionStorage.removeItem('token');
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  public handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
@@ -92,9 +89,13 @@ export class AuthService {
   }
 
   private getHttpHeaders(): HttpHeaders {
-    const result = new HttpHeaders();
-    result.append('Content-Type', 'application/json');
-    result.append('Access-Control-Allow-Origin', '*');
+    var result = new HttpHeaders({ 'Content-Type': 'application/json' });
+    result = result.append('Access-Control-Allow-Origin', '*');
+
+    if (this.IsAuthenticated()) {
+      const bearerToken = "Bearer " + sessionStorage.getItem('token');
+      result = result.set("Authorization", bearerToken);
+    }
     return result;
   }
 }

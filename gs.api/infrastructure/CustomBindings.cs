@@ -3,8 +3,6 @@ using gs.api.infrastructure.logging;
 using gs.api.infrastructure.settings;
 using gs.api.services.reseller;
 using gs.api.storage;
-using gs.api.storage.repositories;
-using gs.api.storage.repositories.interfaces;
 using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +39,7 @@ namespace gs.api.infrastructure
         {
             services.AddTransient<IRegistrationService, RegistrationService>();
             services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IGoodsService, GoodsService>();
         }
 
         private static void BindSettings(IServiceCollection services, IConfiguration configuration, 
@@ -56,8 +55,6 @@ namespace gs.api.infrastructure
             services.
                 AddEntityFrameworkNpgsql()
                 .AddDbContext<Context>(options => options.UseNpgsql(dbSettings.ConnectionString));
-
-            services.AddTransient<IOrganizationsRepository, OrganizationsRepository>();
         }
     }
 }

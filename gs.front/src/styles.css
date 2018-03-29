@@ -5,3 +5,8 @@ html {
 
   display: block;
 }
+
+.loaderGif {
+  width: 20px;
+  height: 20px;
+}

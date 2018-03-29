@@ -1,20 +1,18 @@
 <div class="modal-header">
-  <h4 class="modal-title">Редактирование товара.</h4>
+  <h4 class="modal-title">Редактирование товара</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <p *ngIf="isLoading">загрузка</p>
-
-  <div *ngIf="!isLoading">
+  <div>
     <div class="form-group">
       <label for="name">название</label>
-      <input class="form-control" id="name" placeholder="введите название" [(ngModel)]="editedGood.name">
+      <input class="form-control form-control-sm" id="name" placeholder="введите название" [(ngModel)]="editedGood.name">
     </div>
     <div class="form-group">
       <label for="description">описание</label>
-      <textarea class="form-control" id="description" placeholder="введите описание"
+      <textarea class="form-control form-control-sm" id="description" placeholder="введите описание"
                 [(ngModel)]="editedGood.description">
       </textarea>
       <small class="form-text text-muted">Это описание будет видно покупателю в онлайн-витрине.</small>
@@ -34,6 +32,9 @@
 
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="SaveAndClose()">сохранить</button>
-  <button type="button" class="btn btn-outline-dark" (click)="Close()">закрыть</button>
+  <img src="assets\images\loader.gif" class="loaderGif" [style.visibility]="isLoading ? 'visible' : 'hidden'" />
+  <button type="button" class="btn btn-sm btn-outline-dark" [ngClass]="{'disabled': isLoading}" (click)="SaveAndClose()">
+    сохранить
+  </button>
+  <button type="button" class="btn btn-sm btn-outline-dark" (click)="Close()">закрыть</button>
 </div>

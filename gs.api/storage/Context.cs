@@ -1,6 +1,7 @@
 ﻿using System;
 using gs.api.infrastructure.settings;
 using gs.api.storage.model;
+using gs.api.storage.model.resellers.goods;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,11 +19,12 @@ namespace gs.api.storage
         public DbSet<LtdOrganization> LtdOrganizations { get; set; }
         public DbSet<IeOrganization> IeOrganizations { get; set; }
         public DbSet<User> Users { get; set; }
+        
+        public DbSet<Good> Goods { get; set; }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(connectionString: DbSettings.ConnectionString);
         }
-        
-        
     }
 }

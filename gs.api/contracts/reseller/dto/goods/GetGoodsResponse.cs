@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace gs.api.contracts.suppliers.goods
+namespace gs.api.contracts.reseller.dto.goods
 {
     [DataContract]
     public class GetGoodsResponse
