@@ -75,7 +75,7 @@ export class AuthService {
     sessionStorage.setItem('token', value);
   }
 
-  private clearAuthKey() {
+  public clearAuthKey() {
     sessionStorage.removeItem('token');
   }
 
