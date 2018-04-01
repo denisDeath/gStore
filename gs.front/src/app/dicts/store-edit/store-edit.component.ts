@@ -45,7 +45,7 @@ export class StoreEditComponent implements OnInit {
       this.storesService.AddStore(new AddStoreRequest(this.editedStore))
         .subscribe(addStoreResponse => {
           this.isLoading = false;
-          this.editedStore.id = addStoreResponse.addedStoreId;
+          this.editedStore.id = addStoreResponse.addedId;
           this.activeModal.close(this.editedStore);
         });
     }

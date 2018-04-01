@@ -5,7 +5,7 @@ namespace gs.api.contracts.reseller.dto.dicts.stores
     [DataContract]
     public class Store
     {
-        public Store(int id, int name, string description, string address, bool isShop)
+        public Store(int id, string name, string description, string address, bool isShop)
         {
             Id = id;
             Name = name;
@@ -24,7 +24,7 @@ namespace gs.api.contracts.reseller.dto.dicts.stores
         /// Название магазина.
         /// </summary>
         [DataMember(IsRequired = true)]
-        public int Name { get; }
+        public string Name { get; }
         
         [DataMember(IsRequired = true)]
         public string Description { get; }

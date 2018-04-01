@@ -11,7 +11,7 @@ namespace gs.api.storage.model.resellers.dicts
         [UsedImplicitly]
         public Store() { }
         
-        public Store(long ownerId, int id, int name, string description, string address, bool isShop)
+        public Store(long ownerId, int id, string name, string description, string address, bool isShop)
         {
             Owner = new Organization
             {
@@ -44,7 +44,7 @@ namespace gs.api.storage.model.resellers.dicts
         /// <summary>
         /// Название магазина.
         /// </summary>
-        public int Name { get; set; }
+        public string Name { get; set; }
         
         public string Description { get; set; }
         
