@@ -36,7 +36,7 @@ export class GoodEditComponent implements OnInit {
   }
 
   public Close() {
-    this.activeModal.close('Close click')
+    this.activeModal.close(this.editedGood)
   }
 
   public SaveAndClose() {

@@ -1,21 +1,49 @@
 <div class="modal-header">
-  <h4 class="modal-title">Редактирование товара</h4>
+  <h6 class="modal-title">Редактирование товара</h6>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
   <div>
-    <div class="form-group">
-      <label for="name">название</label>
-      <input class="form-control form-control-sm" id="name" placeholder="введите название" [(ngModel)]="editedGood.name">
+
+    <div class="input-group input-group-sm mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">название</span>
+      </div>
+      <input type="text" class="form-control" aria-label="название" aria-describedby="inputGroup-sizing-sm"
+             [(ngModel)]="editedGood.name">
     </div>
-    <div class="form-group">
-      <label for="description">описание</label>
-      <textarea class="form-control form-control-sm" id="description" placeholder="введите описание"
-                [(ngModel)]="editedGood.description">
-      </textarea>
-      <small class="form-text text-muted">Это описание будет видно покупателю в онлайн-витрине.</small>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">описание</span>
+      </div>
+      <textarea class="form-control" aria-label="описание" [(ngModel)]="editedGood.description"></textarea>
+    </div>
+
+    <div class="input-group input-group-sm mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">ед. измерения</span>
+      </div>
+      <input type="text" class="form-control" aria-label="ед. измерения" aria-describedby="inputGroup-sizing-sm"
+             [(ngModel)]="editedGood.unit">
+    </div>
+
+    <div class="input-group input-group-sm mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">штрих-код</span>
+      </div>
+      <input type="text" class="form-control" aria-label="штрих-код" aria-describedby="inputGroup-sizing-sm"
+             [(ngModel)]="editedGood.barcode">
+    </div>
+
+    <div class="input-group input-group-sm mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">артикул</span>
+      </div>
+      <input type="text" class="form-control" aria-label="артикул" aria-describedby="inputGroup-sizing-sm"
+             [(ngModel)]="editedGood.vendorCode">
     </div>
 
     <!--<div class="form-group">-->

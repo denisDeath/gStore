@@ -40,6 +40,7 @@ export class GoodsComponent implements OnInit {
       .subscribe(getGoodsResponse => {
         this.isLoading = false;
         this.goods = getGoodsResponse.goods;
+        this.sortGoods();
       });
   }
 
@@ -50,6 +51,9 @@ export class GoodsComponent implements OnInit {
     modalRef.result.then(editedGood => {
       this.goods.splice(this.getGoodIndexById(goodId), 1);
       this.goods.push(editedGood);
+      this.sortGoods();
+    })
+    .catch(e => {
     });
   }
 
@@ -57,6 +61,8 @@ export class GoodsComponent implements OnInit {
     const modalRef = this.modalService.open(GoodEditComponent);
     modalRef.result.then(newGood => {
       this.goods.push(newGood);
+    })
+    .catch(e => {
     });
   }
 
@@ -80,5 +86,9 @@ export class GoodsComponent implements OnInit {
       }
     });
     return index;
+  }
+
+  private sortGoods() {
+    this.goods.sort((g1, g2) => g1.name > g2.name ? 1 : 0);
   }
 }
