@@ -56,22 +56,24 @@ namespace gs.api.services.reseller
             return new IsAccountExistsResponse(byPhone);
         }
 
+        public GetOrganizationSettingsResponse GetOrganizationSettings()
+        {
+            var organization = _callContext.OrganizationAndUser.Value.Organization;
+            var user = organization.Owner;
+
+            var settings = DbToContracts.ConvertToOrganizationSettings(organization, user);
+            return new GetOrganizationSettingsResponse(settings);
+        }
+
         public void SaveOrganizationSettings([NotNull] SaveOrganizationSettingsRequest request)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             var organization = _callContext.OrganizationAndUser.Value.Organization;
             var user = organization.Owner;
 
-            user.FirstName = request.OwnerFirstName ?? user.FirstName;
-            user.LastName = request.OwnerLastName ?? user.LastName;
-            user.Patronymic = request.OwnerPatronymic ?? user.Patronymic;
-
-            organization.TradeMark = request.TradeMark ?? organization.TradeMark;
-            organization.FullName = request.FullName ?? organization.FullName;
-            organization.Address = request.Address ?? organization.Address;
-            organization.Phone = request.Phone ?? organization.Phone;
-            organization.Inn = request.Inn ?? organization.Inn;
-            organization.UseVat = request.UseVat ?? organization.UseVat;
+            var db = ContractsToDb.ConvertToContracts(request.Settings);
+            user.UpdateFieldsWithoutPasswordAndPhone(db.User);
+            organization.UpdateFields(db.Organization);
 
             _context.SaveChanges();
         }
@@ -96,11 +98,6 @@ namespace gs.api.services.reseller
             
             organization.Owner.PhoneNumber = request.NewPhoneNumber;
             _context.SaveChanges();
-        }
-
-        public string Test()
-        {
-            return _callContext.OrganizationAndUser.Value.User.PhoneNumber;
         }
 
         private bool IsUserExistsByPhone(string userPhone)

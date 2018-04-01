@@ -32,6 +32,13 @@ namespace gs.api.controllers
 
         [Authorize(Roles = Roles.ResellerAdmin)]
         [HttpPost]
+        public GetOrganizationSettingsResponse GetOrganizationSettings()
+        {
+            return _registrationService.GetOrganizationSettings();
+        }
+        
+        [Authorize(Roles = Roles.ResellerAdmin)]
+        [HttpPost]
         public void SaveOrganizationSettings([FromBody] SaveOrganizationSettingsRequest request)
         {
             _registrationService.SaveOrganizationSettings(request);
@@ -49,12 +56,6 @@ namespace gs.api.controllers
         public void ChangePhoneNumber([FromBody] ChangePhoneNumberRequest request)
         {
              _registrationService.ChangePhoneNumber(request);
-        }
-
-        [HttpPost]
-        public string Test()
-        {
-            return _registrationService.Test();
         }
     }
 }

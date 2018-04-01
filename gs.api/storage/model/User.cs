@@ -22,5 +22,12 @@ namespace gs.api.storage.model
         
         [Required, MinLength(5), MaxLength(50)]
         public string Password { get; set; }
+
+        public void UpdateFieldsWithoutPasswordAndPhone(User source)
+        {
+            FirstName = source.FirstName;
+            LastName = source.LastName;
+            Patronymic = source.Patronymic;
+        }
     }
 }

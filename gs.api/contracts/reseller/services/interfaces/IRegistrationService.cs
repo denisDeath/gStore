@@ -26,7 +26,12 @@ namespace gs.api.contracts.reseller.services.interfaces
         /// Сохранить настройки организации или её владельца.
         /// Настройка сохраняется только если соответствующее поле != null.
         /// </summary>
-        [Throws(typeof(UnauthorizedException))]
+        GetOrganizationSettingsResponse GetOrganizationSettings();
+        
+        /// <summary>
+        /// Сохранить настройки организации или её владельца.
+        /// Настройка сохраняется только если соответствующее поле != null.
+        /// </summary>
         void SaveOrganizationSettings(SaveOrganizationSettingsRequest request);
 
         /// <summary>
@@ -41,7 +46,5 @@ namespace gs.api.contracts.reseller.services.interfaces
         [Throws(typeof(UnauthorizedException))]
         [Throws(typeof(UserPhoneAlreadyInUseException))]
         void ChangePhoneNumber(ChangePhoneNumberRequest request);
-
-        string Test();
     }
 }

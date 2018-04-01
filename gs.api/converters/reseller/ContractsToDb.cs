@@ -2,10 +2,11 @@
 using gs.api.contracts.reseller.dto.dicts.goods;
 using gs.api.contracts.reseller.dto.dicts.stores;
 using gs.api.contracts.reseller.dto.registration;
-using OrganizationDb = gs.api.storage.model.Organization;
 using IeUserDb = gs.api.storage.model.User;
 using GoodDb = gs.api.storage.model.resellers.dicts.Good;
 using StoreDb = gs.api.storage.model.resellers.dicts.Store;
+using OrganizationDb = gs.api.storage.model.Organization;
+using UserDb = gs.api.storage.model.User;
 
 namespace gs.api.converters.reseller
 {
@@ -41,6 +42,28 @@ namespace gs.api.converters.reseller
         public static StoreDb ConvertToStore(this Store source, long ownerId)
         {
             return new StoreDb(ownerId, source.Id, source.Name, source.Description, source.Address, source.IsShop);
+        }
+
+        public static (UserDb User, OrganizationDb Organization) ConvertToContracts(this OrganizationSettings source)
+        {
+            var organization = new OrganizationDb
+            {
+                TradeMark = source.TradeMark,
+                FullName = source.FullName,
+                Address = source.Address,
+                Phone = source.Phone,
+                Inn = source.Inn,
+                UseVat = source.UseVat
+            };
+
+            var user = new UserDb
+            {
+                FirstName = source.OwnerFirstName,
+                LastName = source.OwnerLastName,
+                Patronymic = source.OwnerPatronymic
+            };
+            
+            return (user, organization);
         }
     }
 }

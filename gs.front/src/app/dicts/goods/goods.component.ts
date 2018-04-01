@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {GoodsService} from "../../services/goods/goods.service";
+import {GoodsService} from "../../services/dicts/goods/goods.service";
 import {Good} from "../../models/dicts/goods/good";
 import {Observable} from "rxjs/Observable";
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';

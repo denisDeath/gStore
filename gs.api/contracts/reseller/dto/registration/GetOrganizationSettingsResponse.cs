@@ -3,9 +3,9 @@
 namespace gs.api.contracts.reseller.dto.registration
 {
     [DataContract]
-    public class SaveOrganizationSettingsRequest : BaseRequest
+    public class GetOrganizationSettingsResponse : BaseRequest
     {
-        public SaveOrganizationSettingsRequest(OrganizationSettings settings)
+        public GetOrganizationSettingsResponse(OrganizationSettings settings)
         {
             Settings = settings;
         }

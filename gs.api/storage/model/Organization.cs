@@ -33,5 +33,15 @@ namespace gs.api.storage.model
         /// Работает с НДС.
         /// </summary>
         public bool UseVat { get; set; }
+
+        public void UpdateFields(Organization source)
+        {
+            TradeMark = source.TradeMark;
+            FullName = source.FullName;
+            Address = source.Address;
+            Inn = source.Inn;
+            UseVat = source.UseVat;
+            Phone = source.Phone;
+        }
     }
 }

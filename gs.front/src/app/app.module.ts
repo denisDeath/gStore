@@ -12,7 +12,7 @@ import {AuthService} from './services/auth/auth.service';
 import { LoginComponent } from './login/login.component';
 import { SettingsComponent } from './settings/settings.component';
 import { GoodsComponent } from './dicts/goods/goods.component';
-import {GoodsService} from './services/goods/goods.service';
+import {GoodsService} from './services/dicts/goods/goods.service';
 import { GoodEditComponent } from './dicts/good-edit/good-edit.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
