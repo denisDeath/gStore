@@ -28,6 +28,9 @@ export class StoresComponent implements OnInit {
     this.stores = [];
     this.storesService.GetStores()
       .subscribe(getStoresResponse => {
+        if (!getStoresResponse) {
+          return;
+        }
         this.isLoading = false;
         this.stores = getStoresResponse.stores;
         this.sort();

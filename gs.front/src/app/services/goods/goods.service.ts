@@ -40,10 +40,7 @@ export class GoodsService {
   }
 
   public RemoveGoods(request: RemoveGoodsRequest): Observable<any> {
-    let options = {
-      headers: this.authService.getHttpHeaders()
-    };
-    return this.http.post<RemoveGoodsRequest>(this.removeGoodsUrl, request, options).pipe(
+    return this.http.post<RemoveGoodsRequest>(this.removeGoodsUrl, request).pipe(
       catchError(this.authService.handleError<RemoveGoodsRequest>('RemoveGoods'))
     );
   }

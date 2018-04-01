@@ -41,16 +41,12 @@ namespace gs.api.services.reseller.dicts
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
             
-            // чтобы удалить сущность, мы вытягиваем её из БД.
-            // TODO: надо просто удалять по идентификатору/ам без лишних накладных расходов.
-            foreach (long idToRemove in request.IdsToRemove)
-            {
-                var goodToRemove = _context.Stores
-                    .FirstOrDefault(g => g.Id == idToRemove 
-                                         && g.Owner.OrganizationId == _callContext.CurrentOrganizationId);
-                if (goodToRemove != null)
-                    _context.Remove(goodToRemove);
-            }
+            // TODO: чтобы удалить сущность, мы вытягиваем её из БД.
+            var goodToRemove = _context.Stores
+                .FirstOrDefault(g => g.Id == request.StoreId 
+                                     && g.Owner.OrganizationId == _callContext.CurrentOrganizationId);
+            if (goodToRemove != null)
+                _context.Remove(goodToRemove);
             _context.SaveChanges();
         }
 

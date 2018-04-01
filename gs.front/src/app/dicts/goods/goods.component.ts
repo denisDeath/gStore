@@ -38,6 +38,9 @@ export class GoodsComponent implements OnInit {
     this.goods = [];
     this.goodsService.GetGoods()
       .subscribe(getGoodsResponse => {
+        if (!getGoodsResponse){
+          return;
+        }
         this.isLoading = false;
         this.goods = getGoodsResponse.goods;
         this.sortGoods();

@@ -35,7 +35,9 @@ export class StoresService {
   }
 
   Remove(request: RemoveStoreRequest): Observable<any> {
-    return of<any>();
+    return this.http.post(this.removeUrl, request).pipe(
+      catchError(this.authService.handleError('Remove'))
+    );
   }
 
   GetStoreDetails(request: GetStoreDetailsRequest): Observable<GetStoreDetailsResponse> {
