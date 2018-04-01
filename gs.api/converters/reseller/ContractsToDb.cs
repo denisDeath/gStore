@@ -1,9 +1,11 @@
 ﻿using System;
-using gs.api.contracts.reseller.dto.goods;
+using gs.api.contracts.reseller.dto.dicts.goods;
+using gs.api.contracts.reseller.dto.dicts.stores;
 using gs.api.contracts.reseller.dto.registration;
 using OrganizationDb = gs.api.storage.model.Organization;
 using IeUserDb = gs.api.storage.model.User;
-using GoodDb = gs.api.storage.model.resellers.goods.Good;
+using GoodDb = gs.api.storage.model.resellers.dicts.Good;
+using StoreDb = gs.api.storage.model.resellers.dicts.Store;
 
 namespace gs.api.converters.reseller
 {
@@ -34,6 +36,11 @@ namespace gs.api.converters.reseller
                 source.Barcode,
                 source.VendorCode,
                 source.Unit);
+        }
+        
+        public static StoreDb ConvertToStore(this Store source, long ownerId)
+        {
+            return new StoreDb(ownerId, source.Id, source.Name, source.Description, source.Address, source.IsShop);
         }
     }
 }

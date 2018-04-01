@@ -1,5 +1,8 @@
-﻿using gs.api.contracts.reseller.dto.goods;
-using GoodDb = gs.api.storage.model.resellers.goods.Good;
+﻿using Good = gs.api.contracts.reseller.dto.dicts.goods.Good;
+using Store = gs.api.contracts.reseller.dto.dicts.stores.Store;
+
+using GoodDb = gs.api.storage.model.resellers.dicts.Good;
+using StoreDb = gs.api.storage.model.resellers.dicts.Store;
 
 namespace gs.api.converters.reseller
 {
@@ -13,6 +16,11 @@ namespace gs.api.converters.reseller
                 source.Barcode,
                 source.VendorCode,
                 source.Unit);
+        }
+        
+        public static Store ConvertToStore(this StoreDb source)
+        {
+            return new Store(source.Id, source.Name, source.Description, source.Address, source.IsShop);
         }
     }
 }

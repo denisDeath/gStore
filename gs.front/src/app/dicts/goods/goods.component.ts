@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {GoodsService} from "../../services/goods/goods.service";
-import {Good} from "../../models/good";
+import {Good} from "../../models/dicts/goods/good";
 import {Observable} from "rxjs/Observable";
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 import { ViewEncapsulation } from '@angular/core'
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {GoodEditComponent} from "../good-edit/good-edit.component";
-import {RemoveGoodsRequest} from "../../models/remove-goods-request";
+import {RemoveGoodsRequest} from "../../models/dicts/goods/remove-goods-request";
 
 @Component({
   selector: 'app-goods',

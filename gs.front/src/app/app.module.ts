@@ -16,6 +16,10 @@ import {GoodsService} from './services/goods/goods.service';
 import { GoodEditComponent } from './dicts/good-edit/good-edit.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { StoresComponent } from './dicts/stores/stores.component';
+import { StoreEditComponent } from './dicts/store-edit/store-edit.component';
+import {StoresService} from "./services/dicts/stores/stores.service";
+import {Store} from "./models/dicts/stores/store";
 
 @NgModule({
   declarations: [
@@ -25,7 +29,9 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     LoginComponent,
     SettingsComponent,
     GoodsComponent,
-    GoodEditComponent
+    GoodEditComponent,
+    StoresComponent,
+    StoreEditComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +43,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
   providers: [
     AuthService,
     GoodsService,
+    StoresService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
@@ -44,6 +51,6 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [GoodEditComponent]
+  entryComponents: [GoodEditComponent, StoreEditComponent]
 })
 export class AppModule { }

@@ -1,7 +1,9 @@
 ﻿using gs.api.contracts.reseller.services.interfaces;
+using gs.api.contracts.reseller.services.interfaces.dicts;
 using gs.api.infrastructure.logging;
 using gs.api.infrastructure.settings;
 using gs.api.services.reseller;
+using gs.api.services.reseller.dicts;
 using gs.api.storage;
 using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +42,7 @@ namespace gs.api.infrastructure
             services.AddTransient<IRegistrationService, RegistrationService>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IGoodsService, GoodsService>();
+            services.AddTransient<IStoresService, StoresService>();
         }
 
         private static void BindSettings(IServiceCollection services, IConfiguration configuration, 

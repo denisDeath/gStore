@@ -1,7 +1,7 @@
 ﻿using System;
 using gs.api.infrastructure.settings;
 using gs.api.storage.model;
-using gs.api.storage.model.resellers.goods;
+using gs.api.storage.model.resellers.dicts;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +20,7 @@ namespace gs.api.storage
         public DbSet<User> Users { get; set; }
         
         public DbSet<Good> Goods { get; set; }
+        public DbSet<Store> Stores { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

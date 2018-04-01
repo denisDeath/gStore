@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {Good} from "../../models/good";
+import {Good} from "../../models/dicts/goods/good";
 import {of} from "rxjs/observable/of";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../auth/auth.service";
 import {catchError, tap} from "rxjs/operators";
 import {RegisterResponse} from "../../models/register-response";
-import {GetGoodsResponse} from "../../models/get-goods-response";
-import {AddGoodRequest} from "../../models/add-good-request";
-import {AddGoodResponse} from "../../models/add-good-response";
-import {GetGoodDetailsResponse} from "../../models/get-good-details-response";
-import {GetGoodDetailsRequest} from "../../models/get-good-details-request";
-import {RemoveGoodsRequest} from "../../models/remove-goods-request";
-import {SaveGoodDetailsRequest} from "../../models/save-good-details-request";
+import {GetGoodsResponse} from "../../models/dicts/goods/get-goods-response";
+import {AddGoodRequest} from "../../models/dicts/goods/add-good-request";
+import {AddGoodResponse} from "../../models/dicts/goods/add-good-response";
+import {GetGoodDetailsResponse} from "../../models/dicts/goods/get-good-details-response";
+import {GetGoodDetailsRequest} from "../../models/dicts/goods/get-good-details-request";
+import {RemoveGoodsRequest} from "../../models/dicts/goods/remove-goods-request";
+import {SaveGoodDetailsRequest} from "../../models/dicts/goods/save-good-details-request";
 
 @Injectable()
 export class GoodsService {
@@ -55,10 +55,7 @@ export class GoodsService {
   }
 
   public SaveGoodDetails(request: SaveGoodDetailsRequest): Observable<any> {
-    let options = {
-      headers: this.authService.getHttpHeaders()
-    };
-    return this.http.post(this.saveGoodDetailsUrl, request, options).pipe(
+    return this.http.post(this.saveGoodDetailsUrl, request).pipe(
       catchError(this.authService.handleError<any>('SaveGoodDetails'))
     );
   }

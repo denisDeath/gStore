@@ -5,6 +5,7 @@ import {MainComponent} from './main/main.component';
 import {LoginComponent} from './login/login.component';
 import {SettingsComponent} from './settings/settings.component';
 import {GoodsComponent} from './dicts/goods/goods.component';
+import {StoresComponent} from "./dicts/stores/stores.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'main', component: MainComponent },
   { path: 'settings', component: SettingsComponent },
-  { path: 'dicts/goods', component: GoodsComponent }
+  { path: 'dicts/goods', component: GoodsComponent },
+  { path: 'dicts/stores', component: StoresComponent }
 ];
 
 @NgModule({
