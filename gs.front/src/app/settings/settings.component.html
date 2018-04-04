@@ -1,3 +1,56 @@
-<p>
-  settings works!
-</p>
+<h6 class="modal-title">Настройки предприятия</h6>
+<div class="modal-body">
+  <div>
+
+    <div class="input-group input-group-sm mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Торговая марка</span>
+      </div>
+      <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm"
+             [(ngModel)]="settings.tradeMark" />
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Полное наименование</span>
+      </div>
+      <input class="form-control" [(ngModel)]="settings.fullName"/>
+    </div>
+
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="">ФИО</span>
+      </div>
+      <input class="form-control" [(ngModel)]="settings.ownerFirstName"/>
+      <input class="form-control" [(ngModel)]="settings.ownerLastName"/>
+      <input class="form-control" [(ngModel)]="settings.ownerPatronymic"/>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Юридический адрес</span>
+      </div>
+      <textarea class="form-control" [(ngModel)]="settings.address" ></textarea>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">ИНН</span>
+      </div>
+      <input class="form-control" [(ngModel)]="settings.inn"/>
+    </div>
+
+    <div class="form-check">
+      <input type="checkbox" id="useVat" [(ngModel)]="settings.useVat">
+      <label class="form-check-label" for="useVat">Использует НДС</label>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-footer">
+  <img src="assets\images\loader.gif" class="loaderGif" [style.visibility]="isLoading ? 'visible' : 'hidden'" />
+  <button type="button" class="btn btn-sm btn-outline-dark" [ngClass]="{'disabled': isLoading}" (click)="SaveAndClose()">
+    сохранить
+  </button>
+</div>

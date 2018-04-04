@@ -20,6 +20,7 @@ import { StoresComponent } from './dicts/stores/stores.component';
 import { StoreEditComponent } from './dicts/store-edit/store-edit.component';
 import {StoresService} from "./services/dicts/stores/stores.service";
 import {Store} from "./models/dicts/stores/store";
+import {SettingsService} from "./services/settings/settings.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {Store} from "./models/dicts/stores/store";
     GoodsComponent,
     GoodEditComponent,
     StoresComponent,
-    StoreEditComponent
+    StoreEditComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +46,7 @@ import {Store} from "./models/dicts/stores/store";
     AuthService,
     GoodsService,
     StoresService,
+    SettingsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
