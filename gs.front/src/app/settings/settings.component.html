@@ -21,8 +21,8 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="">ФИО</span>
       </div>
-      <input class="form-control" [(ngModel)]="settings.ownerFirstName"/>
       <input class="form-control" [(ngModel)]="settings.ownerLastName"/>
+      <input class="form-control" [(ngModel)]="settings.ownerFirstName"/>
       <input class="form-control" [(ngModel)]="settings.ownerPatronymic"/>
     </div>
 
@@ -50,7 +50,7 @@
 
 <div class="modal-footer">
   <img src="assets\images\loader.gif" class="loaderGif" [style.visibility]="isLoading ? 'visible' : 'hidden'" />
-  <button type="button" class="btn btn-sm btn-outline-dark" [ngClass]="{'disabled': isLoading}" (click)="SaveAndClose()">
+  <button type="button" class="btn btn-sm btn-outline-dark" [ngClass]="{'disabled': isLoading}" (click)="Save()">
     сохранить
   </button>
 </div>
