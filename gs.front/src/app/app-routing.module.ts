@@ -6,6 +6,7 @@ import {LoginComponent} from './login/login.component';
 import {SettingsComponent} from './settings/settings.component';
 import {GoodsComponent} from './dicts/goods/goods.component';
 import {StoresComponent} from "./dicts/stores/stores.component";
+import {GoodsIncomingListComponent} from "./components/docs/store/goods-incoming-list/goods-incoming-list.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'main', component: MainComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'dicts/goods', component: GoodsComponent },
-  { path: 'dicts/stores', component: StoresComponent }
+  { path: 'dicts/stores', component: StoresComponent },
+  { path: 'docs/store/goodsIncomingList', component: GoodsIncomingListComponent }
 ];
 
 @NgModule({
