@@ -18,11 +18,11 @@ import {SaveGoodDetailsRequest} from "../../../models/dicts/goods/save-good-deta
 @Injectable()
 export class GoodsService {
 
-  private getGoodsUrl = environment.apiServerAddress + '/api/resellers/goods/list/getGoods';
-  private addGoodsUrl = environment.apiServerAddress + '/api/resellers/goods/list/addGood';
-  private removeGoodsUrl = environment.apiServerAddress + '/api/resellers/goods/list/removeGoods';
-  private getGoodDetailsUrl = environment.apiServerAddress + '/api/resellers/goods/list/getGoodDetails';
-  private saveGoodDetailsUrl = environment.apiServerAddress + '/api/resellers/goods/list/saveGoodDetails';
+  private getGoodsUrl = environment.apiServerAddress + '/api/resellers/goods/documents/getGoods';
+  private addGoodsUrl = environment.apiServerAddress + '/api/resellers/goods/documents/addGood';
+  private removeGoodsUrl = environment.apiServerAddress + '/api/resellers/goods/documents/removeGoods';
+  private getGoodDetailsUrl = environment.apiServerAddress + '/api/resellers/goods/documents/getGoodDetails';
+  private saveGoodDetailsUrl = environment.apiServerAddress + '/api/resellers/goods/documents/saveGoodDetails';
 
   constructor(private http: HttpClient,
               private authService: AuthService) { }
