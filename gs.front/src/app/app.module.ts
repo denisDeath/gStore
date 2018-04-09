@@ -20,6 +20,9 @@ import { StoresComponent } from './dicts/stores/stores.component';
 import { StoreEditComponent } from './dicts/store-edit/store-edit.component';
 import {StoresService} from "./services/dicts/stores/stores.service";
 import {Store} from "./models/dicts/stores/store";
+import { GoodCategoryEditComponent } from './dicts/good-category-edit/good-category-edit.component';
+import { GoodCategoriesComponent } from './dicts/good-categories/good-categories.component';
+import {GoodCategoriesService} from './services/dicts/good-categories/good-categories.service';
 
 @NgModule({
   declarations: [
@@ -30,8 +33,12 @@ import {Store} from "./models/dicts/stores/store";
     SettingsComponent,
     GoodsComponent,
     GoodEditComponent,
+    GoodCategoriesComponent,
+    GoodCategoryEditComponent,
     StoresComponent,
-    StoreEditComponent
+    StoreEditComponent,
+    GoodCategoryEditComponent,
+    GoodCategoriesComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +50,7 @@ import {Store} from "./models/dicts/stores/store";
   providers: [
     AuthService,
     GoodsService,
+    GoodCategoriesService,
     StoresService,
     {
       provide: HTTP_INTERCEPTORS,
@@ -51,6 +59,6 @@ import {Store} from "./models/dicts/stores/store";
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [GoodEditComponent, StoreEditComponent]
+  entryComponents: [GoodEditComponent, StoreEditComponent, GoodCategoryEditComponent]
 })
 export class AppModule { }
