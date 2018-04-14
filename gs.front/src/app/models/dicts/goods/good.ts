@@ -11,11 +11,11 @@ export class Good {
 
   constructor() {
     this.id = 0;
-    this.name = "";
-    this.description = "";
+    this.name = '';
+    this.description = '';
     this.imageUris = [];
-    this.barcode = "";
-    this.vendorCode = "";
-    this.unit = "";
+    this.barcode = '';
+    this.vendorCode = '';
+    this.unit = '';
   }
 }

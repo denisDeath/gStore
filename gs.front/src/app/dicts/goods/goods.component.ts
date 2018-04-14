@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {GoodsService} from "../../services/dicts/goods/goods.service";
-import {Good} from "../../models/dicts/goods/good";
-import {Observable} from "rxjs/Observable";
+import {GoodsService} from '../../services/dicts/goods/goods.service';
+import {Good} from '../../models/dicts/goods/good';
+import {Observable} from 'rxjs/Observable';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
-import { ViewEncapsulation } from '@angular/core'
+import { ViewEncapsulation } from '@angular/core';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {GoodEditComponent} from "../good-edit/good-edit.component";
-import {RemoveGoodsRequest} from "../../models/dicts/goods/remove-goods-request";
+import {GoodEditComponent} from '../good-edit/good-edit.component';
+import {RemoveGoodsRequest} from '../../models/dicts/goods/remove-goods-request';
 
 @Component({
   selector: 'app-goods',
@@ -38,7 +38,7 @@ export class GoodsComponent implements OnInit {
     this.goods = [];
     this.goodsService.GetGoods()
       .subscribe(getGoodsResponse => {
-        if (!getGoodsResponse){
+        if (!getGoodsResponse) {
           return;
         }
         this.isLoading = false;
@@ -52,6 +52,10 @@ export class GoodsComponent implements OnInit {
     modalRef.componentInstance.goodId = goodId;
 
     modalRef.result.then(editedGood => {
+      if (editedGood === null) {
+        return;
+      }
+
       this.goods.splice(this.getGoodIndexById(goodId), 1);
       this.goods.push(editedGood);
       this.sortGoods();
@@ -63,6 +67,10 @@ export class GoodsComponent implements OnInit {
   public AddGood() {
     const modalRef = this.modalService.open(GoodEditComponent);
     modalRef.result.then(newGood => {
+      if (newGood === null) {
+        return;
+      }
+
       this.goods.push(newGood);
     })
     .catch(e => {
@@ -83,8 +91,8 @@ export class GoodsComponent implements OnInit {
   }
 
   private getGoodIndexById(goodId: number): number {
-    let index = this.goods.findIndex((g, _, __) => {
-      if (g.id == goodId){
+    const index = this.goods.findIndex((g, _, __) => {
+      if (g.id === goodId) {
         return true;
       }
     });

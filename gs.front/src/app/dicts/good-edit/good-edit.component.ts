@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {Good} from "../../models/dicts/goods/good";
-import {GoodsService} from "../../services/dicts/goods/goods.service";
-import {AddGoodRequest} from "../../models/dicts/goods/add-good-request";
-import {GetGoodDetailsRequest} from "../../models/dicts/goods/get-good-details-request";
-import {SaveGoodDetailsRequest} from "../../models/dicts/goods/save-good-details-request";
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Good} from '../../models/dicts/goods/good';
+import {GoodsService} from '../../services/dicts/goods/goods.service';
+import {AddGoodRequest} from '../../models/dicts/goods/add-good-request';
+import {GetGoodDetailsRequest} from '../../models/dicts/goods/get-good-details-request';
+import {SaveGoodDetailsRequest} from '../../models/dicts/goods/save-good-details-request';
 
 @Component({
   selector: 'app-good-edit',
@@ -18,12 +18,12 @@ export class GoodEditComponent implements OnInit {
   isLoading: boolean;
 
   constructor(public activeModal: NgbActiveModal,
-              private goodsService:GoodsService) {
+              private goodsService: GoodsService) {
   }
 
   ngOnInit() {
     this.editedGood = new Good();
-    if (this.goodId == undefined) {
+    if (this.goodId === undefined) {
       this.isLoading = false;
       return;
     }
@@ -32,16 +32,19 @@ export class GoodEditComponent implements OnInit {
     this.goodsService.GetGoodDetails(new GetGoodDetailsRequest(this.goodId)).subscribe(goodResponse => {
       this.editedGood = goodResponse.goodDetails;
       this.isLoading = false;
-    })
+    });
   }
 
   public Close() {
-    this.activeModal.close(this.editedGood)
+    if (!confirm('Вы хотите выйти без сохранения?')) {
+      return;
+    }
+    this.activeModal.close(null);
   }
 
   public SaveAndClose() {
     this.isLoading = true;
-    if (this.goodId == undefined) {
+    if (this.goodId === undefined) {
       // new good
       this.goodsService.AddGood(new AddGoodRequest(this.editedGood))
         .subscribe(addGoodResponse => {
@@ -49,8 +52,7 @@ export class GoodEditComponent implements OnInit {
           this.editedGood.id = addGoodResponse.addedGoodId;
           this.activeModal.close(this.editedGood);
         });
-    }
-    else {
+    } else {
       this.goodsService.SaveGoodDetails(new SaveGoodDetailsRequest(this.editedGood))
         .subscribe(() => {
           this.isLoading = false;
