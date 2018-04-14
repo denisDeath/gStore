@@ -23,6 +23,7 @@ import {Store} from "./models/dicts/stores/store";
 import {SettingsService} from "./services/settings/settings.service";
 import { GoodsIncomingListComponent } from './components/docs/store/goods-incoming-list/goods-incoming-list.component';
 import {GoodsIncomingService} from "./services/docs/store/goodsIncoming/goods-incoming.service";
+import { FeaturesListComponent } from './components/dicts/features/list/features-list/features-list.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {GoodsIncomingService} from "./services/docs/store/goodsIncoming/goods-in
     StoresComponent,
     StoreEditComponent,
     SettingsComponent,
-    GoodsIncomingListComponent
+    GoodsIncomingListComponent,
+    FeaturesListComponent
   ],
   imports: [
     BrowserModule,
