@@ -18,8 +18,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { StoresComponent } from './dicts/stores/stores.component';
 import { StoreEditComponent } from './dicts/store-edit/store-edit.component';
-import {StoresService} from "./services/dicts/stores/stores.service";
-import {Store} from "./models/dicts/stores/store";
+import {StoresService} from './services/dicts/stores/stores.service';
+import {Store} from './models/dicts/stores/store';
+import { GoodCategoryEditComponent } from './dicts/good-category-edit/good-category-edit.component';
+import { GoodCategoriesComponent } from './dicts/good-categories/good-categories.component';
+import {GoodCategoriesService} from './services/dicts/good-categories/good-categories.service';
 import {SettingsService} from "./services/settings/settings.service";
 import { GoodsIncomingListComponent } from './components/docs/store/goods-incoming-list/goods-incoming-list.component';
 import {GoodsIncomingService} from "./services/docs/store/goodsIncoming/goods-incoming.service";
@@ -34,6 +37,8 @@ import { FeaturesListComponent } from './components/dicts/features/list/features
     SettingsComponent,
     GoodsComponent,
     GoodEditComponent,
+    GoodCategoriesComponent,
+    GoodCategoryEditComponent,
     StoresComponent,
     StoreEditComponent,
     SettingsComponent,
@@ -50,6 +55,7 @@ import { FeaturesListComponent } from './components/dicts/features/list/features
   providers: [
     AuthService,
     GoodsService,
+    GoodCategoriesService,
     StoresService,
     SettingsService,
     GoodsIncomingService,
@@ -60,6 +66,6 @@ import { FeaturesListComponent } from './components/dicts/features/list/features
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [GoodEditComponent, StoreEditComponent]
+  entryComponents: [GoodEditComponent, StoreEditComponent, GoodCategoryEditComponent]
 })
 export class AppModule { }

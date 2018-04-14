@@ -20,6 +20,7 @@ namespace gs.api.storage
         public DbSet<User> Users { get; set; }
         
         public DbSet<Good> Goods { get; set; }
+        public DbSet<GoodCategory> GoodCategories { get; set; }
         public DbSet<Store> Stores { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

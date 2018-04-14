@@ -1,5 +1,6 @@
 ﻿using gs.api.contracts.reseller.services.interfaces;
 using gs.api.contracts.reseller.services.interfaces.dicts;
+using gs.api.converters;
 using gs.api.infrastructure.logging;
 using gs.api.infrastructure.settings;
 using gs.api.services.reseller;
@@ -10,6 +11,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using GoodCategory = gs.api.contracts.reseller.dto.dicts.goodCategories.GoodCategory;
+using GoodCategoryDb = gs.api.storage.model.resellers.dicts.GoodCategory;
 
 namespace gs.api.infrastructure
 {
@@ -20,6 +23,7 @@ namespace gs.api.infrastructure
     {
         public static void Bind(IServiceCollection services, IConfiguration configuration)
         {
+            BindMappers(services);
             BindSettings(services, configuration, out var appSettings);
             BindServices(services, configuration);
             BindDatabase(services, configuration, appSettings);
@@ -43,6 +47,12 @@ namespace gs.api.infrastructure
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IGoodsService, GoodsService>();
             services.AddTransient<IStoresService, StoresService>();
+            services.AddTransient<ICrudService<GoodCategory>, CrudService<GoodCategory, GoodCategoryDb>>();
+        }
+
+        private static void BindMappers(IServiceCollection services)
+        {
+            services.AddTransient<IEntityMapper<GoodCategory, GoodCategoryDb>, GoodCategoryMapper>();
         }
 
         private static void BindSettings(IServiceCollection services, IConfiguration configuration, 
