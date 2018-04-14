@@ -12,8 +12,6 @@ export class OrganizationSettings {
     this.useVat = useVat;
   }
 
-  constructor() {}
-
   ownerFirstName: string;
   ownerLastName: string;
   ownerPatronymic: string;
@@ -23,4 +21,9 @@ export class OrganizationSettings {
   phone: string;
   inn: string;
   useVat: boolean;
+
+  public static Empty(): OrganizationSettings {
+    return new OrganizationSettings('', '', '', '', '', '',
+      '', '', false);
+  }
 }

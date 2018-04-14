@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {OrganizationSettings} from "../models/settings/organization-settings";
-import {SettingsService} from "../services/settings/settings.service";
-import {SaveOrganizationSettingsRequest} from "../models/settings/save-organization-settings-request";
+import {OrganizationSettings} from '../models/settings/organization-settings';
+import {SettingsService} from '../services/settings/settings.service';
+import {SaveOrganizationSettingsRequest} from '../models/settings/save-organization-settings-request';
 
 @Component({
   selector: 'app-settings',
@@ -19,8 +19,8 @@ export class SettingsComponent implements OnInit {
     this.Load();
   }
 
-  private Load(){
-    this.settings = new OrganizationSettings();
+  private Load() {
+    this.settings = OrganizationSettings.Empty();
     this.isLoading = true;
     this.settingsService.GetOrganizationSettings().subscribe(response => {
       this.isLoading = false;
