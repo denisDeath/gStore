@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AddEntityRequest} from '../../models/dicts/good-categories/add-entity-request';
+import {AddEntityRequest} from '../../../../models/dicts/good-categories/add-entity-request';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {GoodCategoriesService} from '../../services/dicts/good-categories/good-categories.service';
-import {GetEntityDetailsRequest} from '../../models/dicts/good-categories/get-entity-details-request';
-import {GoodCategory} from '../../models/dicts/good-categories/good-category';
-import {SaveEntityDetailsRequest} from '../../models/dicts/good-categories/save-entity-details-request';
+import {GoodCategoriesService} from '../../../../services/dicts/good-categories/good-categories.service';
+import {GetEntityDetailsRequest} from '../../../../models/dicts/good-categories/get-entity-details-request';
+import {GoodCategory} from '../../../../models/dicts/good-categories/good-category';
+import {SaveEntityDetailsRequest} from '../../../../models/dicts/good-categories/save-entity-details-request';
 
 @Component({
   selector: 'app-good-category-edit',
@@ -23,7 +23,7 @@ export class GoodCategoryEditComponent implements OnInit {
 
   ngOnInit() {
     this.editedGoodCategory = new GoodCategory();
-    if (this.goodCategoryId == undefined) {
+    if (this.goodCategoryId === undefined) {
       this.isLoading = false;
       return;
     }
@@ -36,7 +36,10 @@ export class GoodCategoryEditComponent implements OnInit {
   }
 
   public Close() {
-    this.activeModal.close(this.editedGoodCategory);
+    if (!confirm('Вы хотите выйти без сохранения?')) {
+      return;
+    }
+    this.activeModal.close(null);
   }
 
   public SaveAndClose() {

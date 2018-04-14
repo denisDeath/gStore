@@ -1,4 +1,4 @@
-import {Good} from "./good";
+import {Good} from './good';
 
 export class AddGoodRequest {
   goodToAdd: Good;

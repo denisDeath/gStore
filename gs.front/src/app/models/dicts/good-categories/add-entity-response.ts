@@ -1,5 +1,3 @@
-import {GoodCategory} from "./good-category";
-
 export class AddEntityResponse {
   addedEntityId: number;
 

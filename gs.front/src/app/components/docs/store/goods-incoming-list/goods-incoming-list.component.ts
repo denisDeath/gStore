@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {GoodsIncomingService} from "../../../../services/docs/store/goodsIncoming/goods-incoming.service";
+import {GoodsIncomingService} from '../../../../services/docs/store/goodsIncoming/goods-incoming.service';
 
 @Component({
   selector: 'app-goods-incoming-list',

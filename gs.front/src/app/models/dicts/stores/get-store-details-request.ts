@@ -1,5 +1,3 @@
-import {Store} from "./store";
-
 export class GetStoreDetailsRequest {
 
   id: number;

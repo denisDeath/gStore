@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Store} from "../../models/dicts/stores/store";
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {GetStoreDetailsRequest} from "../../models/dicts/stores/get-store-details-request";
-import {StoresService} from "../../services/dicts/stores/stores.service";
-import {AddStoreRequest} from "../../models/dicts/stores/add-store-request";
-import {SaveStoreDetailsRequest} from "../../models/dicts/stores/save-store-details-request";
+import {Store} from '../../../../models/dicts/stores/store';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {GetStoreDetailsRequest} from '../../../../models/dicts/stores/get-store-details-request';
+import {StoresService} from '../../../../services/dicts/stores/stores.service';
+import {AddStoreRequest} from '../../../../models/dicts/stores/add-store-request';
+import {SaveStoreDetailsRequest} from '../../../../models/dicts/stores/save-store-details-request';
 
 @Component({
   selector: 'app-store-edit',
@@ -18,11 +18,11 @@ export class StoreEditComponent implements OnInit {
   isLoading: boolean;
 
   constructor(public activeModal: NgbActiveModal,
-              private storesService:StoresService) { }
+              private storesService: StoresService) { }
 
   ngOnInit() {
     this.editedStore = new Store();
-    if (this.storeId == undefined) {
+    if (this.storeId === undefined) {
       this.isLoading = false;
       return;
     }
@@ -31,16 +31,16 @@ export class StoreEditComponent implements OnInit {
     this.storesService.GetStoreDetails(new GetStoreDetailsRequest(this.storeId)).subscribe(response => {
       this.editedStore = response.store;
       this.isLoading = false;
-    })
+    });
   }
 
   public Close() {
-    this.activeModal.close(this.editedStore)
+    this.activeModal.close(this.editedStore);
   }
 
   public SaveAndClose() {
     this.isLoading = true;
-    if (this.storeId == undefined) {
+    if (this.storeId === undefined) {
       // new store
       this.storesService.AddStore(new AddStoreRequest(this.editedStore))
         .subscribe(addStoreResponse => {
@@ -48,8 +48,7 @@ export class StoreEditComponent implements OnInit {
           this.editedStore.id = addStoreResponse.addedId;
           this.activeModal.close(this.editedStore);
         });
-    }
-    else {
+    } else {
       this.storesService.SaveStoreDetails(new SaveStoreDetailsRequest(this.editedStore))
         .subscribe(() => {
           this.isLoading = false;

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {RegisterComponent} from './register/register.component';
-import {MainComponent} from './main/main.component';
-import {LoginComponent} from './login/login.component';
-import {SettingsComponent} from './settings/settings.component';
-import {GoodsComponent} from './dicts/goods/goods.component';
-import {StoresComponent} from "./dicts/stores/stores.component";
-import {GoodsIncomingListComponent} from "./components/docs/store/goods-incoming-list/goods-incoming-list.component";
-import {GoodCategoriesComponent} from './dicts/good-categories/good-categories.component';
+import {RegisterComponent} from './components/common/register/register.component';
+import {MainComponent} from './components/common/main/main.component';
+import {LoginComponent} from './components/common/login/login.component';
+import {SettingsComponent} from './components/common/settings/settings.component';
+import {GoodsComponent} from './components/dicts/goods/list/goods.component';
+import {StoresComponent} from './components/dicts/stores/list/stores.component';
+import {GoodsIncomingListComponent} from './components/docs/store/goods-incoming-list/goods-incoming-list.component';
+import {GoodCategoriesComponent} from './components/dicts/good-categories/list/good-categories.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },

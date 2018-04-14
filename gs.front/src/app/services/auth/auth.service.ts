@@ -23,7 +23,7 @@ export class AuthService {
               private router: Router) { }
 
   Register(organization: Organization): Observable<RegisterResponse> {
-    let options = {
+    const options = {
       headers: this.getHttpHeaders()
     };
     return this.http.post<RegisterResponse>(this.registerUrl, organization, options).pipe(
@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   Login(request: LoginRequest): Observable<LoginResponse> {
-    let options = {
+    const options = {
       headers: this.getHttpHeaders()
     };
     return this.http.post<LoginResponse>(this.loginUrl, request, options).pipe(
@@ -94,12 +94,12 @@ export class AuthService {
   }
 
   public getHttpHeaders(): HttpHeaders {
-    var result = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let result = new HttpHeaders({ 'Content-Type': 'application/json' });
     result = result.append('Access-Control-Allow-Origin', '*');
 
     if (this.IsAuthenticated()) {
-      const bearerToken = "Bearer " + sessionStorage.getItem('token');
-      result = result.set("Authorization", bearerToken);
+      const bearerToken = 'Bearer ' + sessionStorage.getItem('token');
+      result = result.set('Authorization', bearerToken);
     }
     return result;
   }

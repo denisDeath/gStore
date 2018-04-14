@@ -8,8 +8,8 @@ import {
 import { AuthService } from '../services/auth/auth.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {LoginComponent} from "../login/login.component";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {LoginComponent} from '../components/common/login/login.component';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

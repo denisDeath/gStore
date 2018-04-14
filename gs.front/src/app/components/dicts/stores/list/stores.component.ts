@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Store} from "../../models/dicts/stores/store";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {StoresService} from "../../services/dicts/stores/stores.service";
-import {RemoveStoreRequest} from "../../models/dicts/stores/remove-store-request";
-import {StoreEditComponent} from "../store-edit/store-edit.component";
-// import {RemoveStoresRequest} from "../../models/remove-stores-request";
+import {Store} from '../../../../models/dicts/stores/store';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {StoresService} from '../../../../services/dicts/stores/stores.service';
+import {RemoveStoreRequest} from '../../../../models/dicts/stores/remove-store-request';
+import {StoreEditComponent} from '../store-edit/store-edit.component';
 
 @Component({
   selector: 'app-stores',
@@ -73,8 +72,8 @@ export class StoresComponent implements OnInit {
   }
 
   private getGoodIndexById(storeId: number): number {
-    let index = this.stores.findIndex((g, _, __) => {
-      if (g.id == storeId){
+    const index = this.stores.findIndex((g, _, __) => {
+      if (g.id === storeId) {
         return true;
       }
     });

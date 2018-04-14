@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Store} from '../../models/dicts/stores/store';
-import {RemoveStoreRequest} from '../../models/dicts/stores/remove-store-request';
 import {GoodCategoryEditComponent} from '../good-category-edit/good-category-edit.component';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {GoodCategoriesService} from '../../services/dicts/good-categories/good-categories.service';
-import {GoodCategory} from '../../models/dicts/good-categories/good-category';
-import {RemoveEntitiesRequest} from '../../models/dicts/good-categories/remove-entities-request';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {GoodCategoriesService} from '../../../../services/dicts/good-categories/good-categories.service';
+import {GoodCategory} from '../../../../models/dicts/good-categories/good-category';
+import {RemoveEntitiesRequest} from '../../../../models/dicts/good-categories/remove-entities-request';
 
 @Component({
   selector: 'app-good-categories',
@@ -41,6 +39,10 @@ export class GoodCategoriesComponent implements OnInit {
   public Add() {
     const modalRef = this.modalService.open(GoodCategoryEditComponent);
     modalRef.result.then(newGoodCategory => {
+      if (newGoodCategory === null) {
+        return;
+      }
+
       this.goodCategories.push(newGoodCategory);
     })
       .catch(e => {
@@ -65,6 +67,10 @@ export class GoodCategoriesComponent implements OnInit {
     modalRef.componentInstance.goodCategoryId = goodCategoryId;
 
     modalRef.result.then(editedGoodCategory => {
+      if (editedGoodCategory === null) {
+        return;
+      }
+
       this.goodCategories.splice(this.getGoodCategoryIndexById(goodCategoryId), 1);
       this.goodCategories.push(editedGoodCategory);
       this.sort();

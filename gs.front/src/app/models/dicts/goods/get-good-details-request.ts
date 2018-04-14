@@ -1,5 +1,3 @@
-import {Good} from "./good";
-
 export class GetGoodDetailsRequest {
 
   goodId: number;

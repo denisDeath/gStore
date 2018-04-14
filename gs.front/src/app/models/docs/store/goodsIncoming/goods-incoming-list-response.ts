@@ -1,4 +1,4 @@
-import {GoodsIncomingInfo} from "./goods-incoming-info";
+import {GoodsIncomingInfo} from './goods-incoming-info';
 
 export class GoodsIncomingListResponse {
   documents: GoodsIncomingInfo[];

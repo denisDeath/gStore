@@ -1,4 +1,4 @@
-import {GoodCategory} from "./good-category";
+import {GoodCategory} from './good-category';
 
 export class GetEntitiesResponse {
 

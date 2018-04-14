@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../services/auth/auth.service';
-import {LoginRequest} from '../models/login-request';
+import {AuthService} from '../../../services/auth/auth.service';
+import {LoginRequest} from '../../../models/login-request';
 
 @Component({
   selector: 'app-login',

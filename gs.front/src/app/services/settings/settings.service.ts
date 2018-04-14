@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../../environments/environment";
-import {AuthService} from "../auth/auth.service";
-import {HttpClient} from "@angular/common/http";
-import {catchError} from "rxjs/operators";
-import {Observable} from "rxjs/Observable";
-import {GetOrganizationSettingsResponse} from "../../models/settings/get-organization-settings-response";
-import {SaveOrganizationSettingsRequest} from "../../models/settings/save-organization-settings-request";
+import {environment} from '../../../environments/environment';
+import {AuthService} from '../auth/auth.service';
+import {HttpClient} from '@angular/common/http';
+import {catchError} from 'rxjs/operators';
+import {Observable} from 'rxjs/Observable';
+import {GetOrganizationSettingsResponse} from '../../models/settings/get-organization-settings-response';
+import {SaveOrganizationSettingsRequest} from '../../models/settings/save-organization-settings-request';
 
 @Injectable()
 export class SettingsService {
