@@ -4,17 +4,22 @@ using JetBrains.Annotations;
 
 namespace gs.api.storage.model.resellers.dicts
 {
-    public class GoodCategory : BaseDbEntity
+    public class GoodCategory : BaseDbWithOwner
     {
         [UsedImplicitly]
         public GoodCategory() { }
         
-        public GoodCategory(long id, string name, string description, string imageUrl)
+        public GoodCategory(long ownerId, long id, string name, string description, string imageUrl)
+            : base(ownerId)
         {
             Id = id;
             Name = name;
             Description = description;
             ImageUrl = imageUrl;
+        }
+        
+        public GoodCategory(long ownerId): base(ownerId)
+        {
         }
         
         [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]

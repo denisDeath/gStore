@@ -5,9 +5,9 @@ namespace gs.api.converters
 {
     public class GoodCategoryMapper : IEntityMapper<GoodCategory, GoodCategoryDb>
     {
-        public GoodCategoryDb MapToDb(GoodCategory dto)
+        public GoodCategoryDb MapToDb(GoodCategory dto, long ownerId)
         {
-            return new GoodCategoryDb(dto.Id, dto.Name,
+            return new GoodCategoryDb(ownerId, dto.Id, dto.Name,
                 dto.Description, dto.ImageUrl);
         }
 

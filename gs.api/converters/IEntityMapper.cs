@@ -2,7 +2,7 @@
 {
     public interface IEntityMapper<TDto, TDb>
     {
-        TDb MapToDb(TDto dto);
+        TDb MapToDb(TDto dto, long ownerId);
         TDto MapToDto(TDb dbEntity);
     }
 }

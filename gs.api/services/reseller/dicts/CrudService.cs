@@ -13,7 +13,7 @@ using gs.api.storage.model;
 namespace gs.api.services.reseller.dicts
 {
     public class CrudService<T, TDb> : ICrudService<T> where T: BaseDtoEntity        
-                                                       where TDb: BaseDbEntity
+                                                       where TDb: BaseDbWithOwner
     {
         [NotNull] private readonly Context _context;
         [NotNull] private readonly CallContext _callContext;
@@ -30,13 +30,16 @@ namespace gs.api.services.reseller.dicts
         
         public GetEntitiesResponse<T> GetAll()
         {
-            var entities = _context.Set<TDb>().ToList();
+            var entities = _context
+                .Set<TDb>()
+                .Where(g => g.Owner.OrganizationId == _callContext.CurrentOrganizationId)
+                .ToList();
             return new GetEntitiesResponse<T>(entities.Select(_entityMapper.MapToDto));
         }
 
         public AddEntityResponse Add(AddEntityRequest<T> request)
         {
-            var newEntity = _entityMapper.MapToDb(request.EntityToAdd);
+            var newEntity = _entityMapper.MapToDb(request.EntityToAdd, _callContext.CurrentOrganizationId);
             _context.Set<TDb>().Add(newEntity);
             _context.SaveChanges();
             return new AddEntityResponse(newEntity.Id);
@@ -65,7 +68,7 @@ namespace gs.api.services.reseller.dicts
             if (entityFromDb == null)
                 throw new InvalidOperationException($"Entity {typeof(T)} with id {request.Entity.Id} not found.");
 
-            var changedDbEntity = _entityMapper.MapToDb(request.Entity);
+            var changedDbEntity = _entityMapper.MapToDb(request.Entity, _callContext.CurrentOrganizationId);
             entityFromDb.UpdateFieldsFrom(changedDbEntity);
             _context.SaveChanges();
         }
