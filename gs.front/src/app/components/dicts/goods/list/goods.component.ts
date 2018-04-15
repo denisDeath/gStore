@@ -42,7 +42,7 @@ export class GoodsComponent implements OnInit {
           return;
         }
         this.isLoading = false;
-        this.goods = getGoodsResponse.goods;
+        this.goods = getGoodsResponse.entities;
         this.sortGoods();
       });
   }

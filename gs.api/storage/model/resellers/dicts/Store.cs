@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using JetBrains.Annotations;
@@ -6,17 +7,13 @@ using JetBrains.Annotations;
 namespace gs.api.storage.model.resellers.dicts
 {
     [DataContract]
-    public class Store
+    public class Store : BaseDbWithOwner
     {
         [UsedImplicitly]
         public Store() { }
         
-        public Store(long ownerId, int id, string name, string description, string address, bool isShop)
+        public Store(long ownerId, int id, string name, string description, string address, bool isShop): base(ownerId)
         {
-            Owner = new Organization
-            {
-                OrganizationId = ownerId
-            };
             Id = id;
             Name = name;
             Description = description;
@@ -24,23 +21,16 @@ namespace gs.api.storage.model.resellers.dicts
             IsShop = isShop;
         }
 
-        public Store(long ownerId)
+        public Store(long ownerId): base(ownerId)
         {
-            Owner = new Organization
-            {
-                OrganizationId = ownerId
-            };
         }
-        
-        [Required, ForeignKey(nameof(Organization.OrganizationId))]
-        public Organization Owner { get; set; }
         
         /// <summary>
         /// Идентификатор магазина.
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
         public int Id { get; set; }
-        
+
         /// <summary>
         /// Название магазина.
         /// </summary>
@@ -58,8 +48,12 @@ namespace gs.api.storage.model.resellers.dicts
         /// </summary>
         public bool IsShop { get; set; }
         
-        public void UpdateFieldsFrom(Store source)
+        public override void UpdateFieldsFrom(BaseDbEntity entity)
         {
+            var source = (Store) entity;
+            if (source == null)
+                throw new InvalidOperationException($"Parameter entity must be of {nameof(Store)} type.");
+
             Id = source.Id;
             Name = source.Name;
             Description = source.Description;

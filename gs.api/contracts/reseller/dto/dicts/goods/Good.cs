@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using gs.api.contracts.reseller.dto.common;
 
 namespace gs.api.contracts.reseller.dto.dicts.goods
 {
     [DataContract]
-    public class Good
+    public class Good : BaseDtoEntity
     {
         public Good(long id, string name, string description, IEnumerable<string> imageUris, string barcode,
             string vendorCode, string unit)
@@ -19,7 +20,7 @@ namespace gs.api.contracts.reseller.dto.dicts.goods
         }
 
         [DataMember(IsRequired = true)]
-        public long Id { get; set; }
+        public override long Id { get; set; }
         
         [DataMember(IsRequired = true)]
         public string Name { get; set; }

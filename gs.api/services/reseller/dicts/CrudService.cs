@@ -4,7 +4,6 @@ using gs.api.contracts.reseller.dto.common;
 using gs.api.contracts.reseller.dto.goods;
 using gs.api.contracts.reseller.services.interfaces.dicts;
 using gs.api.converters;
-using gs.api.converters.reseller;
 using gs.api.infrastructure;
 using gs.api.storage;
 using JetBrains.Annotations;

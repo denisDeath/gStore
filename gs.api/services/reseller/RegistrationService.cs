@@ -61,7 +61,7 @@ namespace gs.api.services.reseller
             var organization = _callContext.OrganizationAndUser.Value.Organization;
             var user = organization.Owner;
 
-            var settings = DbToContracts.ConvertToOrganizationSettings(organization, user);
+            var settings = CommonMapper.ConvertToOrganizationSettings(organization, user);
             return new GetOrganizationSettingsResponse(settings);
         }
 
@@ -71,7 +71,7 @@ namespace gs.api.services.reseller
             var organization = _callContext.OrganizationAndUser.Value.Organization;
             var user = organization.Owner;
 
-            var db = ContractsToDb.ConvertToContracts(request.Settings);
+            var db = CommonMapper.ConvertToContracts(request.Settings);
             user.UpdateFieldsWithoutPasswordAndPhone(db.User);
             organization.UpdateFields(db.Organization);
 

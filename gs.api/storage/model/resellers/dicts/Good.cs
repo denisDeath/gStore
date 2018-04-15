@@ -1,21 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using JetBrains.Annotations;
 
 namespace gs.api.storage.model.resellers.dicts
 {
-    public class Good
+    public class Good : BaseDbWithOwner
     {
         [UsedImplicitly]
         public Good() { }
         
         public Good(long ownerId, long id, string name, string description, string imageUris, string barcode,
-            string vendorCode, string unit)
+            string vendorCode, string unit): base(ownerId)
         {
-            Owner = new Organization
-            {
-                OrganizationId = ownerId
-            };
             Id = id;
             Name = name;
             Description = description;
@@ -25,20 +22,13 @@ namespace gs.api.storage.model.resellers.dicts
             Unit = unit;
         }
 
-        public Good(long ownerId)
+        public Good(long ownerId): base(ownerId)
         {
-            Owner = new Organization
-            {
-                OrganizationId = ownerId
-            };
         }
-        
-        [Required, ForeignKey(nameof(Organization.OrganizationId))]
-        public Organization Owner { get; set; }
         
         [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
         public long Id { get; set; }
-        
+
         public string Name { get; set; }
         
         public string Description { get; set; }
@@ -57,8 +47,12 @@ namespace gs.api.storage.model.resellers.dicts
         
         public string Unit { get; set; }
 
-        public void UpdateFieldsFrom(Good source)
+        public override void UpdateFieldsFrom(BaseDbEntity entity)
         {
+            var source = (Good) entity;
+            if (source == null)
+                throw new InvalidOperationException($"Parameter entity must be of {nameof(Good)} type.");
+            
             Name = source.Name;
             Description = source.Description;
             ImageUris = source.ImageUris;

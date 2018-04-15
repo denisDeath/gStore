@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using JetBrains.Annotations;
 
@@ -34,6 +35,9 @@ namespace gs.api.storage.model.resellers.dicts
         public override void UpdateFieldsFrom(BaseDbEntity entity)
         {
             var source = (GoodCategory) entity;
+            if (source == null)
+                throw new InvalidOperationException($"Parameter entity must be of {nameof(GoodCategory)} type.");
+            
             Name = source.Name;
             Description = source.Description;
             ImageUrl = source.ImageUrl;

@@ -26,12 +26,12 @@ namespace gs.api.services.reseller.dicts
             var goods = _context.Stores
                 .Where(g => g.Owner.OrganizationId == _callContext.CurrentOrganizationId)
                 .ToList();
-            return new GetResponse(goods.Select(DbToContracts.ConvertToStore));
+            return new GetResponse(goods.Select(CommonMapper.ConvertToStore));
         }
         
         public AddResponse Add(AddRequest request)
         {
-            var newItem = ContractsToDb.ConvertToStore(request.Store, _callContext.CurrentOrganizationId);
+            var newItem = CommonMapper.ConvertToStore(request.Store, _callContext.CurrentOrganizationId);
             _context.Stores.Add(newItem);
             _context.SaveChanges();
             return new AddResponse(newItem.Id);
