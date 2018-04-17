@@ -19,7 +19,7 @@ export class GoodsIncomingService {
     return of<GoodsIncomingListResponse>(
       new GoodsIncomingListResponse([
         new GoodsIncomingInfo(0, new Date(), 'store', 'supplier'),
-        new GoodsIncomingInfo(1, new Date(), 'store 2', 'supplier 2')
+        new GoodsIncomingInfo(1, new Date(), 'entityDetails 2', 'supplier 2')
       ]));
   }
 

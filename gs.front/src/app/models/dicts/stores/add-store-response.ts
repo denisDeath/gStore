@@ -1,8 +1,8 @@
 
 export class AddStoreResponse {
-  addedId: number;
+  addedEntityId: number;
 
-  constructor(addedId: number) {
-    this.addedId = addedId;
+  constructor(addedEntityId: number) {
+    this.addedEntityId = addedEntityId;
   }
 }

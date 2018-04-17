@@ -13,7 +13,7 @@ import {SaveGoodDetailsRequest} from '../../../../models/dicts/goods/save-good-d
 })
 export class GoodEditComponent implements OnInit {
 
-  @Input() goodId: number;
+  @Input() entityId: number;
   editedGood: Good;
   isLoading: boolean;
 
@@ -23,14 +23,14 @@ export class GoodEditComponent implements OnInit {
 
   ngOnInit() {
     this.editedGood = new Good();
-    if (this.goodId === undefined) {
+    if (this.entityId === undefined) {
       this.isLoading = false;
       return;
     }
 
     this.isLoading = true;
-    this.goodsService.GetGoodDetails(new GetGoodDetailsRequest(this.goodId)).subscribe(goodResponse => {
-      this.editedGood = goodResponse.goodDetails;
+    this.goodsService.GetGoodDetails(new GetGoodDetailsRequest(this.entityId)).subscribe(goodResponse => {
+      this.editedGood = goodResponse.entityDetails;
       this.isLoading = false;
     });
   }
@@ -44,12 +44,12 @@ export class GoodEditComponent implements OnInit {
 
   public SaveAndClose() {
     this.isLoading = true;
-    if (this.goodId === undefined) {
+    if (this.entityId === undefined) {
       // new good
       this.goodsService.AddGood(new AddGoodRequest(this.editedGood))
         .subscribe(addGoodResponse => {
           this.isLoading = false;
-          this.editedGood.id = addGoodResponse.addedGoodId;
+          this.editedGood.id = addGoodResponse.addedEntityId;
           this.activeModal.close(this.editedGood);
         });
     } else {

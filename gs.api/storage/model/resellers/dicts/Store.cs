@@ -12,7 +12,7 @@ namespace gs.api.storage.model.resellers.dicts
         [UsedImplicitly]
         public Store() { }
         
-        public Store(long ownerId, int id, string name, string description, string address, bool isShop): base(ownerId)
+        public Store(long ownerId, long id, string name, string description, string address, bool isShop): base(ownerId)
         {
             Id = id;
             Name = name;
@@ -29,7 +29,7 @@ namespace gs.api.storage.model.resellers.dicts
         /// Идентификатор магазина.
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Название магазина.

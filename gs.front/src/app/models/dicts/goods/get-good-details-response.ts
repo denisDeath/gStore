@@ -2,7 +2,7 @@ import {Good} from './good';
 
 export class GetGoodDetailsResponse {
 
-  goodDetails: Good;
+  entityDetails: Good;
 
   constructor() {}
 }

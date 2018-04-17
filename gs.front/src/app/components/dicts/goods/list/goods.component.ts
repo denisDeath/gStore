@@ -49,7 +49,7 @@ export class GoodsComponent implements OnInit {
 
   public EditGood(goodId: number) {
     const modalRef = this.modalService.open(GoodEditComponent);
-    modalRef.componentInstance.goodId = goodId;
+    modalRef.componentInstance.entityId = goodId;
 
     modalRef.result.then(editedGood => {
       if (editedGood === null) {

@@ -1,8 +1,8 @@
 export class GetGoodDetailsRequest {
 
-  goodId: number;
+  entityId: number;
 
-  constructor(goodId: number) {
-    this.goodId = goodId;
+  constructor(entityId: number) {
+    this.entityId = entityId;
   }
 }

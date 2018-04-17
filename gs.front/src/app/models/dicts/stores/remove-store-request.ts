@@ -1,7 +1,7 @@
 export class RemoveStoreRequest {
-  storeId: number;
+  idsToRemove: number[];
 
-  constructor(storeId: number) {
-    this.storeId = storeId;
+  constructor(idsToRemove: number[]) {
+    this.idsToRemove = idsToRemove;
   }
 }

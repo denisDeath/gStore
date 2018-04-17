@@ -31,7 +31,7 @@ export class StoresComponent implements OnInit {
           return;
         }
         this.isLoading = false;
-        this.stores = getStoresResponse.stores;
+        this.stores = getStoresResponse.entities;
         this.sort();
       });
   }
@@ -51,7 +51,7 @@ export class StoresComponent implements OnInit {
     }
 
     this.isLoading = true;
-    this.storesService.Remove(new RemoveStoreRequest(storeId))
+    this.storesService.Remove(new RemoveStoreRequest([storeId]))
       .subscribe(_ => {
         this.isLoading = false;
         this.stores.splice(this.getGoodIndexById(storeId), 1);

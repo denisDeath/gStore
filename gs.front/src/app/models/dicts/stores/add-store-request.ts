@@ -1,9 +1,9 @@
 import {Store} from './store';
 
 export class AddStoreRequest {
-  store: Store;
+  entityToAdd: Store;
 
-  constructor(goodToAdd: Store) {
-    this.store = goodToAdd;
+  constructor(entityToAdd: Store) {
+    this.entityToAdd = entityToAdd;
   }
 }

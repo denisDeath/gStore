@@ -29,7 +29,7 @@ export class StoreEditComponent implements OnInit {
 
     this.isLoading = true;
     this.storesService.GetStoreDetails(new GetStoreDetailsRequest(this.storeId)).subscribe(response => {
-      this.editedStore = response.store;
+      this.editedStore = response.entityDetails;
       this.isLoading = false;
     });
   }
@@ -41,11 +41,11 @@ export class StoreEditComponent implements OnInit {
   public SaveAndClose() {
     this.isLoading = true;
     if (this.storeId === undefined) {
-      // new store
+      // new entityDetails
       this.storesService.AddStore(new AddStoreRequest(this.editedStore))
         .subscribe(addStoreResponse => {
           this.isLoading = false;
-          this.editedStore.id = addStoreResponse.addedId;
+          this.editedStore.entityId = addStoreResponse.addedId;
           this.activeModal.close(this.editedStore);
         });
     } else {

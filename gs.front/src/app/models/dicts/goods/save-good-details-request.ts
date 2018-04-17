@@ -1,9 +1,9 @@
 import {Good} from './good';
 
 export class SaveGoodDetailsRequest {
-  good: Good;
+  entity: Good;
 
-  constructor(good: Good) {
-    this.good = good;
+  constructor(entity: Good) {
+    this.entity = entity;
   }
 }

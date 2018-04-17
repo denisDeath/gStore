@@ -1,9 +1,9 @@
 import {Good} from './good';
 
 export class AddGoodResponse {
-  addedGoodId: number;
+  addedEntityId: number;
 
-  constructor(addedGoodId: number) {
-    this.addedGoodId = addedGoodId;
+  constructor(addedEntityId: number) {
+    this.addedEntityId = addedEntityId;
   }
 }

@@ -15,11 +15,11 @@ import {GetStoreDetailsResponse} from '../../../models/dicts/stores/get-store-de
 @Injectable()
 export class StoresService {
 
-  private getStoresUrl = environment.apiServerAddress + '/api/resellers/stores/get';
-  private addStoresUrl = environment.apiServerAddress + '/api/resellers/stores/add';
-  private removeUrl = environment.apiServerAddress + '/api/resellers/stores/remove';
-  private getDetailsUrl = environment.apiServerAddress + '/api/resellers/stores/getDetails';
-  private saveDetailsUrl = environment.apiServerAddress + '/api/resellers/stores/saveDetails';
+  private getStoresUrl = environment.apiServerAddress + '/api/resellers/stores/list/getAll';
+  private addStoresUrl = environment.apiServerAddress + '/api/resellers/stores/list/add';
+  private removeUrl = environment.apiServerAddress + '/api/resellers/stores/list/remove';
+  private getDetailsUrl = environment.apiServerAddress + '/api/resellers/stores/list/getDetails';
+  private saveDetailsUrl = environment.apiServerAddress + '/api/resellers/stores/list/save';
 
   constructor(private http: HttpClient,
               private authService: AuthService) { }

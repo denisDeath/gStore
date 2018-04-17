@@ -1,9 +1,9 @@
 import {Store} from './store';
 
 export class SaveStoreDetailsRequest {
-  store: Store;
+  entity: Store;
 
-  constructor(store: Store) {
-    this.store = store;
+  constructor(entity: Store) {
+    this.entity = entity;
   }
 }

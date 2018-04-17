@@ -26,7 +26,7 @@ namespace gs.api.controllers.resellers.dicts
         public AddEntityResponse Add([NotNull] [FromBody] AddEntityRequest<T> request)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            var result = _crudService.Add(request);
+            AddEntityResponse result = _crudService.Add(request);
             return result;
         }
 

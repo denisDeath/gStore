@@ -1,8 +1,8 @@
 export class GetStoreDetailsRequest {
 
-  id: number;
+  entityId: number;
 
-  constructor(id: number) {
-    this.id = id;
+  constructor(entityId: number) {
+    this.entityId = entityId;
   }
 }

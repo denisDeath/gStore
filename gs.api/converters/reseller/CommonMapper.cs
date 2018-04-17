@@ -1,8 +1,6 @@
-﻿using gs.api.contracts.reseller.dto.dicts.stores;
-using gs.api.contracts.reseller.dto.registration;
+﻿using gs.api.contracts.reseller.dto.registration;
 using IeUserDb = gs.api.storage.model.User;
 using GoodDb = gs.api.storage.model.resellers.dicts.Good;
-using StoreDb = gs.api.storage.model.resellers.dicts.Store;
 using OrganizationDb = gs.api.storage.model.Organization;
 using UserDb = gs.api.storage.model.User;
 
@@ -26,11 +24,6 @@ namespace gs.api.converters.reseller
                 Password = source.Password
             };
         }
-        
-        public static StoreDb ConvertToStore(this Store source, long ownerId)
-        {
-            return new StoreDb(ownerId, source.Id, source.Name, source.Description, source.Address, source.IsShop);
-        }
 
         public static (UserDb User, OrganizationDb Organization) ConvertToContracts(this OrganizationSettings source)
         {
@@ -52,11 +45,6 @@ namespace gs.api.converters.reseller
             };
             
             return (user, organization);
-        }
-        
-        public static Store ConvertToStore(this StoreDb source)
-        {
-            return new Store(source.Id, source.Name, source.Description, source.Address, source.IsShop);
         }
 
         public static OrganizationSettings ConvertToOrganizationSettings(OrganizationDb organization, UserDb user)

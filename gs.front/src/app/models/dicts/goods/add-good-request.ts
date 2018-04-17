@@ -1,9 +1,9 @@
 import {Good} from './good';
 
 export class AddGoodRequest {
-  goodToAdd: Good;
+  entityToAdd: Good;
 
-  constructor(goodToAdd: Good) {
-    this.goodToAdd = goodToAdd;
+  constructor(entityToAdd: Good) {
+    this.entityToAdd = entityToAdd;
   }
 }
