@@ -3,7 +3,7 @@ import {GoodCategoryEditComponent} from '../good-category-edit/good-category-edi
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GoodCategoriesService} from '../../../../services/dicts/good-categories/good-categories.service';
 import {GoodCategory} from '../../../../models/dicts/good-categories/good-category';
-import {RemoveEntitiesRequest} from '../../../../models/dicts/good-categories/remove-entities-request';
+import {RemoveEntitiesRequest} from '../../../../models/common/remove-entities-request';
 
 @Component({
   selector: 'app-good-categories',
@@ -25,7 +25,7 @@ export class GoodCategoriesComponent implements OnInit {
   public Load() {
     this.isLoading = true;
     this.goodCategories = [];
-    this.goodCategoriesService.GetAll()
+    this.goodCategoriesService.getAll()
       .subscribe(getEntitiesResponse => {
         if (!getEntitiesResponse) {
           return;
@@ -55,7 +55,7 @@ export class GoodCategoriesComponent implements OnInit {
     }
 
     this.isLoading = true;
-    this.goodCategoriesService.Remove(new RemoveEntitiesRequest([goodCategoryId]))
+    this.goodCategoriesService.remove(new RemoveEntitiesRequest([goodCategoryId]))
       .subscribe(_ => {
         this.isLoading = false;
         this.goodCategories.splice(this.getGoodCategoryIndexById(goodCategoryId), 1);
