@@ -24,7 +24,7 @@ namespace gs.api.storage.model.resellers.dicts
         }
         
         [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
-        public long Id { get; set; }
+        public override long Id { get; set; }
 
         public string Name { get; set; }
         

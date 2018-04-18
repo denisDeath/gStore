@@ -2,7 +2,7 @@
 {
     public abstract class BaseDbEntity
     {
-        public long Id { get; }
+        public abstract long Id { get; set; }
         public abstract void UpdateFieldsFrom(BaseDbEntity entity);
     }
 }

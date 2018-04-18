@@ -25,9 +25,9 @@ namespace gs.api.storage.model.resellers.dicts
         public Good(long ownerId): base(ownerId)
         {
         }
-        
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
-        public long Id { get; set; }
+        public override long Id { get; set; }
 
         public string Name { get; set; }
         
