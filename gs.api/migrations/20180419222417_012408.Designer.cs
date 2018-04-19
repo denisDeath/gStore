@@ -12,9 +12,10 @@ using System;
 namespace gs.api.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20180419222417_012408")]
+    partial class _012408
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,63 +102,6 @@ namespace gs.api.Migrations
                     b.ToTable("GoodCategories");
                 });
 
-            modelBuilder.Entity("gs.api.storage.model.resellers.dicts.spec.BoolSpecificationValue", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<long?>("OrganizationId")
-                        .IsRequired();
-
-                    b.Property<bool>("Value");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrganizationId");
-
-                    b.ToTable("BoolSpecificationValues");
-                });
-
-            modelBuilder.Entity("gs.api.storage.model.resellers.dicts.spec.ColorSpecificationValue", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Blue");
-
-                    b.Property<int>("Green");
-
-                    b.Property<string>("Name");
-
-                    b.Property<long?>("OrganizationId")
-                        .IsRequired();
-
-                    b.Property<int>("Red");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrganizationId");
-
-                    b.ToTable("ColorSpecificationValues");
-                });
-
-            modelBuilder.Entity("gs.api.storage.model.resellers.dicts.spec.NumberSpecificationValue", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<long?>("OrganizationId")
-                        .IsRequired();
-
-                    b.Property<decimal>("Value");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrganizationId");
-
-                    b.ToTable("NumberSpecificationValues");
-                });
-
             modelBuilder.Entity("gs.api.storage.model.resellers.dicts.spec.Specification", b =>
                 {
                     b.Property<long>("Id")
@@ -178,23 +122,6 @@ namespace gs.api.Migrations
                     b.ToTable("Specifications");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Specification");
-                });
-
-            modelBuilder.Entity("gs.api.storage.model.resellers.dicts.spec.StringSpecificationValue", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<long?>("OrganizationId")
-                        .IsRequired();
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrganizationId");
-
-                    b.ToTable("StringSpecificationValues");
                 });
 
             modelBuilder.Entity("gs.api.storage.model.resellers.dicts.Store", b =>
@@ -313,60 +240,8 @@ namespace gs.api.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("gs.api.storage.model.resellers.dicts.spec.BoolSpecificationValue", b =>
-                {
-                    b.HasOne("gs.api.storage.model.resellers.dicts.spec.BoolSpecification", "ParentSpecification")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("gs.api.storage.model.Organization", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("gs.api.storage.model.resellers.dicts.spec.ColorSpecificationValue", b =>
-                {
-                    b.HasOne("gs.api.storage.model.resellers.dicts.spec.ColorSpecification", "ParentSpecification")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("gs.api.storage.model.Organization", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("gs.api.storage.model.resellers.dicts.spec.NumberSpecificationValue", b =>
-                {
-                    b.HasOne("gs.api.storage.model.resellers.dicts.spec.NumberSpecification", "ParentSpecification")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("gs.api.storage.model.Organization", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("gs.api.storage.model.resellers.dicts.spec.Specification", b =>
                 {
-                    b.HasOne("gs.api.storage.model.Organization", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("gs.api.storage.model.resellers.dicts.spec.StringSpecificationValue", b =>
-                {
-                    b.HasOne("gs.api.storage.model.resellers.dicts.spec.StringSpecification", "ParentSpecification")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("gs.api.storage.model.Organization", "Owner")
                         .WithMany()
                         .HasForeignKey("OrganizationId")

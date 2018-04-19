@@ -26,12 +26,6 @@ namespace gs.api.storage.model.resellers.dicts
         }
         
         /// <summary>
-        /// Идентификатор магазина.
-        /// </summary>
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
-        public override long Id { get; set; }
-
-        /// <summary>
         /// Название магазина.
         /// </summary>
         public string Name { get; set; }
