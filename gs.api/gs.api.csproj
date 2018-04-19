@@ -16,7 +16,7 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="contracts\reseller\dto\dicts" />
+    <Folder Include="contracts\reseller\dto\dicts\specs" />
     <Folder Include="Controllers" />
     <Folder Include="Migrations" />
   </ItemGroup>
