@@ -25,7 +25,9 @@ import {GoodCategoriesService} from './services/dicts/good-categories/good-categ
 import {SettingsService} from './services/settings/settings.service';
 import { GoodsIncomingListComponent } from './components/docs/store/goods-incoming-list/goods-incoming-list.component';
 import {GoodsIncomingService} from './services/docs/store/goodsIncoming/goods-incoming.service';
-import { FeaturesListComponent } from './components/dicts/features/list/features-list/features-list.component';
+import { DictPanelComponent } from './components/common/dict-panel/dict-panel.component';
+import {SpecificationsListComponent} from "./components/dicts/specifications/list/specifications-list.component";
+import {SpecificationsService} from "./services/dicts/specifications/specifications.service";
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { FeaturesListComponent } from './components/dicts/features/list/features
     StoreEditComponent,
     SettingsComponent,
     GoodsIncomingListComponent,
-    FeaturesListComponent
+    SpecificationsListComponent,
+    DictPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { FeaturesListComponent } from './components/dicts/features/list/features
   providers: [
     AuthService,
     GoodsService,
+    SpecificationsService,
     GoodCategoriesService,
     StoresService,
     SettingsService,

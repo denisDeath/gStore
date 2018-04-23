@@ -16,10 +16,12 @@ using Microsoft.Extensions.DependencyInjection;
 using GoodCategory = gs.api.contracts.reseller.dto.dicts.goodCategories.GoodCategory;
 using Good = gs.api.contracts.reseller.dto.dicts.goods.Good;
 using Store = gs.api.contracts.reseller.dto.dicts.stores.Store;
+using Specification = gs.api.contracts.reseller.dto.dicts.specs.Specification;
 
 using GoodCategoryDb = gs.api.storage.model.resellers.dicts.GoodCategory;
 using GoodDb = gs.api.storage.model.resellers.dicts.Good;
 using StoreDb = gs.api.storage.model.resellers.dicts.Store;
+using SpecificationDb = gs.api.storage.model.resellers.dicts.spec.Specification; 
 
 namespace gs.api.infrastructure
 {
@@ -56,6 +58,7 @@ namespace gs.api.infrastructure
             services.AddTransient<ICrudService<GoodCategory>, CrudService<GoodCategory, GoodCategoryDb>>();
             services.AddTransient<ICrudService<Good>, CrudService<Good, GoodDb>>();
             services.AddTransient<ICrudService<Store>, CrudService<Store, StoreDb>>();
+            services.AddTransient<ICrudService<Specification>, CrudService<Specification, SpecificationDb>>();
         }
 
         private static void BindMappers(IServiceCollection services)
@@ -63,6 +66,7 @@ namespace gs.api.infrastructure
             services.AddTransient<IEntityMapper<GoodCategory, GoodCategoryDb>, GoodCategoryMapper>();
             services.AddTransient<IEntityMapper<Good, GoodDb>, GoodMapper>();
             services.AddTransient<IEntityMapper<Store, StoreDb>, StoreMapper>();
+            services.AddTransient<IEntityMapper<Specification, SpecificationDb>, SpecificationMapper>();
         }
 
         private static void BindSettings(IServiceCollection services, IConfiguration configuration, 

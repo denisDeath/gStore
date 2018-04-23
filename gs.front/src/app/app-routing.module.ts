@@ -8,6 +8,7 @@ import {GoodsComponent} from './components/dicts/goods/list/goods.component';
 import {StoresComponent} from './components/dicts/stores/list/stores.component';
 import {GoodsIncomingListComponent} from './components/docs/store/goods-incoming-list/goods-incoming-list.component';
 import {GoodCategoriesComponent} from './components/dicts/good-categories/list/good-categories.component';
+import {SpecificationsListComponent} from "./components/dicts/specifications/list/specifications-list.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -15,9 +16,12 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'main', component: MainComponent },
   { path: 'settings', component: SettingsComponent },
+
   { path: 'dicts/goods', component: GoodsComponent },
+  { path: 'dicts/features', component: SpecificationsListComponent },
   { path: 'dicts/goodCategories', component: GoodCategoriesComponent },
   { path: 'dicts/stores', component: StoresComponent },
+
   { path: 'docs/store/goodsIncomingList', component: GoodsIncomingListComponent }
 ];
 

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FeaturesListComponent } from './features-list.component';
+import { DictPanelComponent } from './dict-panel.component';
 
-describe('FeaturesListComponent', () => {
-  let component: FeaturesListComponent;
-  let fixture: ComponentFixture<FeaturesListComponent>;
+describe('DictPanelComponent', () => {
+  let component: DictPanelComponent;
+  let fixture: ComponentFixture<DictPanelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FeaturesListComponent ]
+      declarations: [ DictPanelComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FeaturesListComponent);
+    fixture = TestBed.createComponent(DictPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
